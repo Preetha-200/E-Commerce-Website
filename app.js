@@ -29,7 +29,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
     store: new pgSession({
         pool: pool,
-        tableName: 'session'
+        tableName: 'session',
+        createTableIfMissing: false
     }),
     secret: 'D11P^2004-april',
     resave: false,
@@ -39,6 +40,7 @@ app.use(session({
         maxAge: 24 * 60 * 60 * 1000
     },
 }));
+
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
