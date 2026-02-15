@@ -1,0 +1,11 @@
+<% if (!user) { %>
+    <section id="signin-form">
+        <h2>SIGN IN</h2>
+        <form action="/signin" method="POST" style="margin-top: 10px;">
+            <input type="text" name="username" placeholder="Enter Username" required>
+            <button type="submit">Sign In</button>
+        </form>
+        <p>Or</p>
+        <a href="/sign-up">Create an Account</a>
+    </section>
+<% } %>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOLDEC</title>
+    </style>
+    <link rel="icon" type="image/x-icon" href="img/Gold Luxury Business Logo.png">
+    <link rel="stylesheet" href="/css/stylesheet.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-...your-integrity-hash..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="/js/script.js"></script>
+    <script src="/js/slider.js"></script>
+    <style>
+        #cart{
+            display: grid;
+            grid-template-columns: 70% 30%;
+        }
+        #cart-table{
+            padding: 0 40px;
+        }
+        .c-table{
+            display: flex;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            padding: 15px;
+            transition: transform 0.3s ease;
+            margin: 20px 10px;
+        }
+        .c-p-details{
+            margin-left: 20px;
+        }
+        .c-p-button{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 85%;
+        }
+        .update-btn{
+            font-size: small;
+            color: azure;
+            background-color: rgb(44, 44, 44);
+        }
+        .remove-btn{
+            background-color: goldenrod;
+            border: 1px solid goldenrod;
+            color: #fff6f6;
+            width: 80px;
+            height: 30px;
+        }
+        .products{
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            margin: 30px;
+        }
+        .product{
+            position: relative;
+            width: 240px;
+            height: 360px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin: 0 30px;
+        }
+        .product img{
+            width: 220px;
+            margin: 10px;
+        } 
+        .wishlist-icon {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background-color: rgb(255, 255, 255);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .wishlist-icon i{
+            position: relative;
+            top: 5px;
+            left: 5px;
+            font-size: 1.6rem;
+        }
+        .red-heart {
+            color: red !important;
+        }
+        .grey-heart {
+            color: grey !important;
+        }
+        .rating{
+            position: absolute;
+            background-color:rgb(255, 255, 255, 0.7);
+            width: 50px;
+            height: 15px;
+            padding: 5px;
+            font-size: 14px;
+            z-index: 99;
+            top: 190px;
+            left: 15px;
+        }
+        .rating i{
+            position: relative;
+        }
+        .rating span{
+            position: relative;
+            color: black;
+        }
+        .cart_empty{
+            width: 100%; 
+            height: 13%; 
+            color: grey;
+            background-color: rgb(249, 255, 253);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart_empty i{
+            font-size: 100px;
+            opacity: 30%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="banner-container">
+        <div class="banner">
+            <p>get your first 10% off with coupon code gol-5 for non-discounted watches and avail exclusive offers</p>
+        </div>
+    </div> 
+    <section id="header">
+        <a href="/">
+            <img src="img/logo.png" class="goldec">
+        </a>
+        <form action="/search" method="get">
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass" style="color: rgb(156, 156, 156); overflow-y: visible; z-index: 1; position: relative; left: 35px; top: 12px;"></i>
+                <input type="search" name="query" placeholder="search...">
+                <i class="fa-solid fa-microphone" style="color: rgb(156, 156, 156); overflow-y: visible; z-index: 1; position: relative;left: -35px; top: 12px;"></i>
+            </div>
+        </form>
+        <div class="menu">
+            <button class="openbtn" onclick="nav_res()">&#9776;</button>
+        </div>
+        <nav id="mySidepanel" class="nav">
+            <div class="menu" style="margin-left: 20px;">
+                <button class="openbtn" onclick="nav_res()">&times;</button>
+            </div>
+            <div class="nav-display-container">
+                <a href="/about">
+                    <div class="nav-links h-about">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#999999"><path d="M168.46-739.74V-790h624.15v50.26H168.46Zm4.1 569.74v-248.67h-49.07v-50.25L168.46-670h623.49l45.23 201.08v50.25H788.1V-170h-50.25v-248.67H543.64V-170H172.56Zm50.26-50.26h270.57v-198.41H222.82v198.41Zm-49.33-248.66h613.43-613.43Zm0 0h613.43L753-619.74H207.41l-33.92 150.82Z"/></svg></div>
+                        <ul>About</ul>
+                    </div> 
+                </a>
+                <a href="/wishlist">
+                    <div class="nav-links wishlist-nav-icon">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#999999"><path d="m480-147.34-35.9-32.51q-101.87-93.03-168.34-160.06-66.48-67.04-105.59-119.1-39.12-52.07-54.64-94.34Q100-595.63 100-638.46q0-83.25 56.14-139.39Q212.28-834 295.13-834q54.69 0 102.05 26.94 47.36 26.93 82.82 77.99 38.44-52.54 84.89-78.74Q611.34-834 664.87-834q82.85 0 138.99 56.15Q860-721.71 860-638.46q0 42.83-15.53 85.11-15.52 42.27-54.61 94.28-39.08 52.01-105.52 119.1T515.9-179.85L480-147.34Zm0-67.12q98.48-89.65 162.08-153.68 63.6-64.03 100.89-111.79 37.29-47.76 52.03-84.89 14.74-37.13 14.74-73.55 0-62.81-41.07-104.09-41.08-41.28-103.65-41.28-49.89 0-91.88 29.32-41.99 29.32-71.14 85.09h-44.41q-29.13-55.49-71.05-84.95t-91.56-29.46q-62.19 0-103.45 41.28-41.27 41.28-41.27 104.29 0 36.38 14.78 73.64 14.79 37.27 51.9 85.19 37.11 47.93 101.14 111.66Q382.1-303.95 480-214.46Zm0-284.64Z"/></svg></div>
+                        <ul>Wishlist</ul>
+                    </div> 
+                </a>
+                <a href="/cart">
+                    <div class="nav-links h-cart"> 
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#999999"><path d="M289.4-98.1q-27.54 0-46.68-19.35-19.13-19.35-19.13-47t19.27-46.85q19.27-19.21 46.81-19.21 27.54 0 46.8 19.35 19.27 19.35 19.27 46.99 0 27.65-19.35 46.86T289.4-98.1Zm387.69 0q-27.54 0-46.67-19.35-19.14-19.35-19.14-47t19.27-46.85q19.27-19.21 46.81-19.21 27.54 0 46.81 19.35 19.26 19.35 19.26 46.99 0 27.65-19.34 46.86-19.35 19.21-47 19.21ZM235.33-740.15l108.16 225.84h276.48q3.47 0 6.29-1.73t4.48-4.81l114.75-208.53q2.31-4.24.38-7.51-1.92-3.26-6.54-3.26h-504Zm-24.97-50.26h555q24.53 0 37.09 21.09 12.57 21.09.78 42.86L678.55-500.6q-9.94 16.83-25.76 26.69-15.82 9.86-34.33 9.86H324l-52.26 96.25q-2.82 4.62-.06 10 2.76 5.39 8.53 5.39h463.22v50.25H284.67q-38.52 0-56.4-28.88-17.88-28.88-.27-61.37l61.95-112.36-149.33-314.97H65.28V-870h107.49l37.59 79.59Zm133.13 276.1h283.79-283.79Z"/></svg></div>                 
+                        <ul>Cart</ul>
+                    </div> 
+                </a>
+                <a href="/my-orders">
+                    <div class="nav-links h-order">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#999999"><path d="M454.87-163.03v-302.71L190.26-618.77v295.8q0 3.07 1.53 5.76 1.54 2.7 4.62 4.62l258.46 149.56Zm50.26 0 258.46-149.56q3.08-1.92 4.62-4.62 1.53-2.69 1.53-5.76v-296.21L505.13-465.74v302.71Zm-56.41 54.23L171.28-268.82q-14.77-8.36-23.02-22.92-8.26-14.57-8.26-31.29v-313.94q0-16.72 8.26-31.29 8.25-14.56 23.02-22.92L448.72-851.2q14.77-8.36 31.28-8.36t31.28 8.36l277.44 160.02q14.77 8.36 23.02 22.92 8.26 14.57 8.26 31.29v313.94q0 16.72-8.26 31.29-8.25 14.56-23.02 22.92L511.28-108.8q-14.77 8.36-31.28 8.36t-31.28-8.36Zm187.41-490.74 105.08-60.66-255.06-147.57q-3.07-1.67-6.15-1.67-3.08 0-6.15 1.67L375.36-751l260.77 151.46ZM480-508.51l105.72-61.69L324.1-721.23 218.38-660.2 480-508.51Z"/></svg></div>
+                        <ul>Orders</ul>
+                    </div> 
+                </a>
+                <a href="/signin">
+                    <div class="nav-links h-account">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#999999"><path d="M480-492.72q-57.75 0-96.44-38.69t-38.69-96.56q0-57.88 38.69-96.44 38.69-38.56 96.44-38.56t96.44 38.56q38.69 38.56 38.69 96.44 0 57.87-38.69 96.56-38.69 38.69-96.44 38.69ZM180-187.69v-80.26q0-31.28 16.71-55.58 16.7-24.29 43.8-37.34 61.88-28.41 121.06-42.74 59.18-14.34 118.42-14.34t118.23 14.54q58.98 14.54 120.69 42.72 27.81 13.03 44.45 37.24Q780-299.23 780-267.95v80.26H180Zm50.26-50.26h499.48v-30q0-14.46-8.93-27.45-8.94-12.99-23.58-20.6-56.56-27.62-109.34-39.65-52.78-12.04-107.89-12.04t-108.43 12.04Q318.26-343.62 262.36-316q-14.64 7.61-23.37 20.6-8.73 12.99-8.73 27.45v30ZM480-542.97q35.97 0 60.42-24.45 24.45-24.45 24.45-60.43 0-35.97-24.45-60.42-24.45-24.45-60.42-24.45t-60.42 24.45q-24.45 24.45-24.45 60.42 0 35.98 24.45 60.43 24.45 24.45 60.42 24.45Zm0-84.88Zm0 389.9Z"/></svg></div>
+                        <ul>Account</ul>
+                    </div> 
+                </a>
+            </div>
+        </nav>
+    </section>
+    <section id="categories">
+        <nav>
+            <ul>MEN</ul>
+            <ul>WOMEN</ul>
+            <ul>SMART WATCHES</ul>
+            <ul>PREMIUM ALARMS</ul>
+            <ul>PREMIUM COLLECTIONS</ul>
+            <ul>KIDS COLLECTIONS</ul>
+            <ul>COUPLES COLLECTIONS</ul>
+            <ul>CLOCKS</ul>
+            <ul>GIFTS</ul>
+        </nav>
+    </section>
+    <section id="h_nav">
+        <a href="/" style=" color: grey;"> <p>Home</p></a>    
+        <p>></p>
+        <p>Cart</p>
+    </section> 
+    <section id="cart">
+        <div id="cart-table">
+            <% if (cart.length > 0) { %>
+                <div style="margin: 40px 40px;">
+                    <% cart.forEach(product => { %>
+                        <a href="/product-details?id=<%= product.productId %>">
+                            <div class="c-table">
+                                <img src="<%= product.product_img %>" alt="Product Image" width="200px">
+                                <div class="c-p-details">
+                                    <a href="/product-details?id=<%= product.productId %>">
+                                        <p style="color: rgb(243, 97, 0); font-size: 15px;"><%= product.productBrand %></p>
+                                        <p style="color: rgb(27, 27, 27); font-size: 16px; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; line-height: 1.2; max-height: calc(1.5em * 2);"><%= product.productFeature %></p>
+                                    </a>
+                                    <form method="POST" action="/cart/update-quantity">
+                                        <label for="quantity">qty</label>
+                                        <input type="hidden" name="productId" value="<%= product.productId %>">
+                                        <input type="number" name="quantity" value="<%= product.quantity %>" min="1" style="width: 60px;">
+                                        <button type="submit" class="update-btn">OK</button>
+                                    </form>
+                                    <div class="c-p-button">
+                                        <p><%= product.currencySymbol %><%= product.convertedPrice * product.quantity %></p>
+                                        <form method="POST" action="/cart/remove">
+                                            <input type="hidden" name="productId" value="<%= product.productId %>">
+                                            <button type="submit" class="remove-btn">Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <div class="cart_empty">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <p>! YOUR CART IS EMPTY</p>
+                </div>
+            <% } %>
+        </div>      
+        <div id="similar-products" style="margin-left: 0; background-color: rgb(255, 249, 241); width: 300px;">
+            <h3 style="margin: 15px 70px;">Similar Products</h3>
+            <div class="similar-products">
+                <% if (similarProducts.length > 0) { %>
+                    <div class="product-list">
+                        <% similarProducts.forEach(product => { %>
+                            <div class="product-item" style="margin-bottom: 13px;">
+                                <a href="/product-details?id=<%= product.id %>">
+                                    <div class="product">
+                                        <div class="wishlist-icon" data-id="<%= product.id %>" data-is-in-wishlist="<%= product.isInWishlist %>">
+                                            <i class="<%= product.isInWishlist ? 'fas red-heart' : 'far grey-heart' %> fa-heart"></i>
+                                        </div>
+                                        <div class="rating">
+                                            <i class="fas fa-star" style="color: goldenrod;"></i>
+                                            <span class="rating-value">
+                                                <%= (typeof product.rating === 'number' && !isNaN(product.rating)) ? product.rating.toFixed(1) : '4.0' %>
+                                            </span>
+                                        </div>
+                                        <img src="<%= product.product_img %>" alt="<%= product.p_category %>">
+                                        <p style="color: rgb(243, 97, 0); font-size: 13px;"><%= product.brand %></p>
+                                        <p style="color: rgb(27, 27, 27); font-size: 14px; width: auto; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; line-height: 1.2; max-height: calc(1.5em * 2);"><%= product.p_features %></p>
+                                        <p style="color: grey; font-size: 13px;"><%= product.p_category %></p>
+                                        <p style="color: rgb(27, 27, 27); font-size: 13px;"> <%= product.currencySymbol %><%= product.convertedPrice %></p>
+                                    </div>
+                                </a>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } else { %>
+                    <p>No similar products available.</p>
+                <% } %>
+            </div>
+        </div>        
+           
+    </section>
+    
+    <% if (!user) { %>
+        <%- include('partials/signin-form') %>
+    <% } %>
+
+    <footer>
+        <div class="collections">
+            <h3>COLLECTIONS</h3>
+            <p>Goldec Automatics</p>
+            <p>Aura Power Pearls</p>
+            <p>Ecplise</p>
+            <p>Goldec Jewels</p>
+            <p>Premium Clocks</p>
+            <p>Alarm Clocks</p>
+            <p>Smart Watches</p>
+        </div>
+        <div class="Customer-service">
+            <h3>CUSTOMER SERVICE</h3>
+            <p>Payment Options</p>
+            <p>Track Order</p>
+            <p>Help & Contact</p>
+            <p>FAQs</p>
+        </div>
+        <div class="f-about">
+            <h3>BRAND PROTECTION</h3>
+            <p>Corporate</p>
+            <p>Careers</p>
+            <p>Blog</p>
+        </div>
+        <div class="f-links">
+            <p>Download Goldec Store App</p>
+            <div class="download">
+                <img src="/img/app_store.png">
+                <img src="/img/play_store.png">
+            </div>
+            <p>Follow Us On</p>
+            <div class="follow-us-on">
+                <img src="/img/facebook-1.png">
+                <img src="/img/insta-1.png">
+                <img src="/img/tweet-1.png">
+                <img src="/img/tube-1.png">
+            </div>
+            <p>Want Help? <a href="" style="color: rgb(194, 193, 193);">Click Here</a> To Chat With Us On</p>
+            <p>Operating Hours: 10:00AM To 10:00PM Monday To Sunday</p>
+        </div>
+        <div class="f-payment">
+            <img src="/img/visa.png">
+            <img src="/img/master_card.png">
+            <img src="/img/rupay.png">
+            <img src="/img/american_express.png">
+            <img src="/img/diners_club.png">
+            <img src="/img/icici.png">
+            <img src="/img/axis.png">
+        </div>
+    </footer>
+
+
+</body>
+</html>
+

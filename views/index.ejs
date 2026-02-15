@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Goldec</title>
+    <link rel="icon" type="image/x-icon" href="/img/Gold Luxury Business Logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-...your-integrity-hash..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/js/script.js"></script>
+    <style>
+        #new-products, #recommended-products{
+            width: 100%;
+            height: 430px;
+            margin: 40px 10px;
+        }
+        #new-products h3, #recommended-products h3{
+            margin-left: 40px;
+            margin-top: 0;
+            font-family: 'Cinzel';
+            font-size: 23px;
+            color: #2c2c2c;
+        }
+        .product-wrapper{
+            position: relative;
+            margin-left: 3%;
+        }
+        .rating{
+            position: absolute;
+            background-color:rgb(255, 255, 255, 0.7);
+            width: 50px;
+            height: 15px;
+            padding: 5px;
+            font-size: 14px;
+            z-index: 99;
+            top: 200px;
+            left: 15px;
+        }
+        .wishlist-icon {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background-color: rgb(255, 255, 255);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .wishlist-icon i{
+            position: relative;
+            top: 5px;
+            left: 5px;
+            font-size: 1.6rem;
+        }
+        .s-prev-btn, .s-next-btn, .swiper4-prev, .swiper4-next{
+            top: 45%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .s-prev-btn:hover, .s-next-btn:hover, .swiper4-prev:hover, .swiper4-next:hover { background-color: rgba(0, 0, 0, 0.8);}
+        .s-prev-btn::after, .s-next-btn::after, .swiper4-prev::after, .swiper4-next::after { font-size: 16px;}
+        .product p{           
+            font-weight: normal;
+            margin: 5px 10px;
+        }
+        .product{
+            width: 240px;
+            height: 370px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin: 0;
+        }
+        .product img{
+            width: 220px;
+            margin: 10px;
+        } 
+        .product-features{font-size: 14px;}       
+        .swiper-container{
+            position: relative;
+            width: 100%;
+        }
+        .red-heart { color: red !important;}
+        .grey-heart { color: grey !important;}
+        @media (max-width: 540px){
+            #new-products, #recommended-products{
+                height: 300px;
+                margin: 40px 2%; 
+            }
+            #recommended-products{height: 320px;}
+            #new-products h3,  #recommended-products h3{
+                margin-left: 2%;
+                font-size: 18px;
+            }
+            .product-brand, .product-features{ font-size: 13px;}
+            .product-category{ display: none;}
+            .product-price{ font-size: 12px;}                             
+            .rating{
+                width: 45px;
+                height: 12px;
+                padding: 3px;
+                font-size: 13px;
+                top: 54%;
+                left: 5%;
+            }
+            .wishlist-icon {
+                top: 3%;
+                right: 5%;
+                width: 30px;
+                height: 30px;
+            }
+            .wishlist-icon i{
+                top: 15%;
+                left: 15%;
+                font-size: 20px;
+            }
+            .s-prev-btn, .s-next-btn, .swiper4-prev, .swiper4-next{ display: none;}
+            .product p{ font-weight: normal;}
+            .product{
+                width: 170px;
+                height: 270px;
+                border-radius: 5px;
+                margin: 0;
+            }
+            .product img{
+                width: 98%;
+                margin: 1%;
+            }  
+        }
+        @media (max-width: 430px){
+            #new-products, #recommended-products{
+                height: 300px;
+                margin: 30px 2%; 
+            }
+            #new-products h3,  #recommended-products h3{ margin-left: 3%;}
+            .product-brand, .product-features{ font-size: 12px;}
+            .product-price{ font-size: 11px;}                             
+            .rating{
+                width: 45px;
+                height: 12px;
+                padding: 3px;
+                font-size: 13px;
+                top: 54%;
+                left: 5%;
+            }
+            .wishlist-icon {
+                width: 25px;
+                height: 25px;
+
+            }
+            .wishlist-icon i{ font-size: 18px;}
+            .product{
+                width: 160px;
+                height: 250px;
+                border-radius: 5px;
+                margin: 0;
+            }
+            .product img{
+                width: 96%;
+                margin: 2%;
+            }  
+        }
+    </style>
+</head>
+<body>  
+    <div class="banner-container">
+        <div class="banner">
+            <p>get your first 10% off with coupon code gol-5 for non-discounted watches and avail exclusive offers</p>
+        </div>
+    </div> 
+    <section id="header">
+        <a href="/">
+            <img src="img/logo.png" class="goldec">
+        </a>
+        <form action="/search" method="get">
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass" style="color: rgb(156, 156, 156); overflow-y: visible; z-index: 1; position: relative; left: 35px; top: 12px;"></i>
+                <input type="search" name="query" placeholder="search...">
+                <i class="fa-solid fa-microphone" style="color: rgb(156, 156, 156); overflow-y: visible; z-index: 1; position: relative;left: -35px; top: 12px;"></i>
+            </div>
+        </form>
+        <div class="menu">
+            <button class="openbtn" onclick="nav_res()">&#9776;</button>
+        </div>
+        <nav id="mySidepanel" class="nav">
+            <div class="menu e-menu" style="margin-left: 20px;">
+                <button class="openbtn" onclick="nav_res()">&times;</button>
+            </div>
+            <div class="nav-display-container">
+                <a href="/about">
+                    <div class="nav-links h-about">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M182-746v-28h596v28H182Zm4 560v-240h-52v-28l48-200h596l48 200v28h-52v240h-28v-240H534v240H186Zm28-28h292v-212H214v212Zm-52-240h636-636Zm0 0h636l-41-172H203l-41 172Z"/></svg></div>
+                        <ul>About</ul>
+                    </div> 
+                </a>
+                <a href="/wishlist">
+                    <div class="nav-links wishlist-nav-icon">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="m480-190-22-20q-97-89-160.5-152t-100-110.5Q161-520 146.5-558T132-634q0-71 48.5-119.5T300-802q53 0 99 28.5t81 83.5q35-55 81-83.5t99-28.5q71 0 119.5 48.5T828-634q0 38-14.5 76t-51 85.5Q726-425 663-362T502-210l-22 20Zm0-38q96-87 158-149t98-107.5q36-45.5 50-80.5t14-69q0-60-40-100t-100-40q-48 0-88.5 27.5T494-660h-28q-38-60-78-87t-88-27q-59 0-99.5 40T160-634q0 34 14 69t50 80.5q36 45.5 98 107T480-228Zm0-273Z"/></svg></div>
+                        <ul>Wishlist</ul>
+                    </div> 
+                </a>
+                <a href="/cart">
+                    <div class="nav-links h-cart"> 
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M232-132q-25 0-42.5-17.5T172-192v-416q0-25 17.5-42.5T232-668h100q0-62 43-105t105-43q62 0 105 43t43 105h100q25 0 42.5 17.5T788-608v416q0 25-17.5 42.5T728-132H232Zm0-28h496q12 0 22-10t10-22v-416q0-12-10-22t-22-10H232q-12 0-22 10t-10 22v416q0 12 10 22t22 10Zm248-292q62 0 105-43t43-105h-28q0 50-35 85t-85 35q-50 0-85-35t-35-85h-28q0 62 43 105t105 43ZM360-668h240q0-50-35-85t-85-35q-50 0-85 35t-35 85ZM200-160v-480 480Z"/></svg></div>
+                        <ul>Cart</ul>
+                    </div> 
+                </a>
+                <a href="/my-orders">
+                    <div class="nav-links h-order">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M466-168v-304L200-626v286q0 8 4 15t12 12l250 145Zm28 0 250-145q8-5 12-12t4-15v-286L494-472v304Zm-44 23L202-288q-14-8-22-22t-8-30v-280q0-16 8-30t22-22l248-143q14-8 30-8t30 8l248 143q14 8 22 22t8 30v280q0 16-8 30t-22 22L510-145q-14 8-30 8t-30-8Zm175-435 118-68-247-143q-8-5-16-5t-16 5l-101 58 262 153Zm-145 84 117-68-263-152-117 68 263 152Z"/></svg></div>
+                        <ul>Orders</ul>
+                    </div> 
+                </a>
+                <a href="/signin">
+                    <div class="nav-links h-account">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M480-512q-44.55 0-76.27-31.72Q372-575.45 372-620t31.73-76.28Q435.45-728 480-728t76.28 31.72Q588-664.55 588-620t-31.72 76.28Q524.55-512 480-512ZM212-232v-52q0-22 13.5-41.5T262-356q55-26 109.5-39T480-408q54 0 108.5 13T698-356q23 11 36.5 30.5T748-284v52H212Zm28-28h480v-24q0-14-9.5-26.5T684-332q-48-23-99.69-35.5Q532.63-380 480-380t-104.31 12.5Q324-355 276-332q-17 9-26.5 21.5T240-284v24Zm240-280q33 0 56.5-23.5T560-620q0-33-23.5-56.5T480-700q-33 0-56.5 23.5T400-620q0 33 23.5 56.5T480-540Zm0-80Zm0 360Z"/></svg></div>
+                        <ul>Account</ul>
+                    </div> 
+                </a>
+            </div>
+        </nav>
+    </section>
+    <section id="categories">
+        <nav>
+            <a href="/products?category=Men’s Watch"><ul>MEN</ul></a>
+            <a href="/products?category=Women’s Watch"><ul>WOMEN</ul></a>
+            <a href="/products?category=Smart Watch"><ul>SMART WATCHES</ul></a>
+            <a href="/products?category=Alarm Clock"><ul>PREMIUM ALARMS</ul></a>
+            <a href="/products?category=Men’s Watch,Women’s Watch"><ul>PREMIUM COLLECTIONS</ul></a>
+            <a href="/products?category=Kids Watch"><ul>KIDS COLLECTIONS</ul></a>
+            <a href="/products?category=Couple Watch"><ul>COUPLES COLLECTIONS</ul></a>
+            <a href="/products?category=Wall Clock"><ul>CLOCKS</ul></a>
+            <a href="/products?category=Couples Watch"><ul>GIFTS</ul></a>
+        </nav>
+    </section>
+    <section id="location">
+        <i class="fa-solid fa-location-dot" style="font-size: small;"></i>
+        <p>Select a location to see product avilability</p>
+    </section>
+    <section id="index">
+        <section id="offer">
+            <div class="slide-container">
+                <div class="slides">
+                    <a href="/products?category=Wall Clock"><img src="/img/1.png" alt="Description" class="active img o-slide-1"></a>
+                    <a href="/products?category=Smart Watch"><img src="/img/2.png" alt="Description" class="img o-slide-2"></a>
+                    <a href="/products?brand=AURA"><img src="/img/3.png" alt="Description" class="img o-slide-3"></a>
+                    <a href="/products?brand=ECPLISE"><img src="/img/4.png" alt="Description" class="img o-slide-4"></a>
+                    <a href="/products?category=Alarm Clock"><img src="/img/5.png" alt="Description" class="img o-slide-5"></a>
+                    <a href="/products?category=Kids Watch"><img src="/img/6.png" alt="Description" class="img o-slide-6"></a>
+                </div>
+                <div class="buttons">
+                    <button class="prev"><i class="fa-solid fa-caret-left"></i></button>
+                    <button class="next"><i class="fa-solid fa-caret-right"></i></button>
+                </div> 
+                <div class="dotsContainer">
+                    <div class="dot active" attr='0' onclick="switchImage(this)"></div>
+                    <div class="dot" attr='1' onclick="switchImage(this)"></div>
+                    <div class="dot" attr='2' onclick="switchImage(this)"></div>
+                    <div class="dot" attr='3' onclick="switchImage(this)"></div>
+                    <div class="dot" attr='4' onclick="switchImage(this)"></div>
+                    <div class="dot" attr='5' onclick="switchImage(this)"></div>
+                </div>
+            </div>
+        </section>
+        <section id="trends" class="swiper swiper-3">
+            <div class="trends-container">
+                <div class="trends swiper-wrapper">
+                    <a class="swiper-slide" href="/products?category=Men’s Watch"><img src="/img/classic.png" class="trends-img"></a>
+                    <a class="swiper-slide" href="/products?category=Women’s Watch"><img src="/img/chic-1.png" class="trends-img"></a>
+                    <a class="swiper-slide" href="/products?category=Couple Watch"><img src="/img/couple.png" class="trends-img"></a>
+                </div>
+                <div class="trends-button">
+                    <button class="swiper-button-prev swiper3-prev"></button>
+                    <button class="swiper-button-next swiper3-next"></button>
+                </div> 
+            </div>
+            <div class="swiper-pagination trends-pagination"></div>
+        </section>
+        <section id="badges" class="swiper-1">
+            <h1>THE BEST WAY TO BUY THE PRODUCTS YOU LOVE</h1>
+            <div class="badge-container">
+                <div class="badge swiper-wrapper">
+                    <div class="bagde-img swiper-slide">
+                        <a href="/products"><img src="/img/sale.png"></a>
+                        <p>Sale</p>
+                    </div>
+                    <div class="bagde-img swiper-slide">
+                        <a href="/products?category=Men’s Watch"><img src="/img/men.png"></a>
+                        <p>Men</p>
+                    </div>
+                    <div class="bagde-img swiper-slide">
+                        <a href="/products?category=Womens Watch"><img src="/img/women.png"></a>
+                        <p>Women</p>
+                    </div>
+                    <div class="bagde-img swiper-slide">
+                        <a href="/products?category=Couple Watch"><img src="/img/couple-1.png"></a>
+                        <p>Couple</p>
+                    </div>
+                    <div class="bagde-img swiper-slide">
+                        <a href="/products?category=Kids Watch"><img src="/img/kids.png"></a>
+                        <p>Kids</p>
+                    </div>
+                    <div class="bagde-img swiper-slide">
+                        <a href="/products?category=Men’s Watch&style=Luxury"><img src="/img/lux.png"></a>
+                        <p>Luxe</p>
+                    </div>
+                    <div class="bagde-img swiper-slide">
+                        <a href="/products?category=Wall Clock"><img src="/img/clock.png"></a>
+                        <p>Clocks</p>
+                    </div>
+                    <div class="bagde-img swiper-slide">
+                        <a href="/products?category=Alarm Clock"><img src="/img/alarm.png"></a>
+                        <p>Alarms</p>
+                    </div>
+                    <div class="bagde-img swiper-slide">
+                        <a href="/products?category=Smart Watch"><img src="/img/smart.png"></a>
+                        <p>Smart watches</p>
+                    </div>
+                    <div class="bagde-img swiper-slide">
+                        <img src="/img/aura.png">
+                        <p>Aura</p>
+                    </div>
+                    <div class="empty-div swiper-slide"></div>
+                </div>
+                <div class="buttons-badge">
+                    <button class="prevs swiper-button-prev swiper1-prev"></button>
+                    <button class="nexts swiper-button-next swiper1-next"></button>
+                </div>
+            </div>
+        </section>
+    </section>
+    <section id="new-products">
+        <h3>New Arrivals</h3>
+        <div class="swiper-container">
+            <div class="product-wrapper swiper-wrapper">
+                <% newArrivals.forEach(product => { %>
+                    <div class="new_product_slides swiper-slide">
+                        <a href="/product-details?id=<%= product.id %>" style="text-decoration: none; color: inherit;">
+                            <div class="product">
+                                <div class="wishlist-icon" data-id="<%= product.id %>" data-is-in-wishlist="<%= product.isInWishlist %>">
+                                    <i class="<%= product.isInWishlist ? 'fas red-heart' : 'far grey-heart' %> fa-heart"></i>
+                                </div>                                                                                       
+                                <div class="rating">
+                                    <i class="fas fa-star" style="color: goldenrod;"></i>
+                                    <span class="rating-value">
+                                        <%= (typeof product.rating === 'number' && !isNaN(product.rating)) ? product.rating.toFixed(1) : '4.0' %>
+                                    </span>
+                                </div>
+                                <img src="<%= product.product_img.replace('/upload/', '/upload/f_auto,q_auto,w_400/') %>" alt="<%= product.p_category %>" loading="lazy">
+                                <p class="product-brand"><%= product.brand %></p>
+                                <p class="product-features" style="color: rgb(27, 27, 27); width: 90%; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; line-height: 1.2; max-height: calc(1.5em * 2);"><%= product.p_features %></p>
+                                <p class="product-category"><%= product.p_category %></p>
+                                <p class="product-price"><%= currencySymbol %><%= product.convertedPrice %></p>
+                            </div>
+                        </a>
+                    </div>
+                <% }); %>
+            </div>
+            <div class="new_products_button">
+                <button class="swiper-button-prev s-prev-btn"></button>
+                <button class="swiper-button-next s-next-btn"></button>
+            </div>
+        </div>
+    </section>
+    <section id="recommended-products" class ="swiper swiper-4">
+        <h3>Recommended for You</h3>
+        <div class="swiper-container rec-products-container">
+            <div class="product-wrapper swiper-wrapper">
+                <% recommendedProducts.forEach(product => { %>
+                    <div class="recommended_product_slides swiper-slide">
+                        <a href="/product-details?id=<%= product.id %>" style="text-decoration: none; color: inherit;">
+                            <div class="product">
+                                <div class="wishlist-icon" data-id="<%= product.id %>" data-is-in-wishlist="<%= product.isInWishlist %>">
+                                    <i class="<%= product.isInWishlist ? 'fas red-heart' : 'far grey-heart' %> fa-heart"></i>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star" style="color: goldenrod;"></i>
+                                    <span class="rating-value">
+                                        <%= (typeof product.rating === 'number' && !isNaN(product.rating)) ? product.rating.toFixed(1) : '4.0' %>
+                                    </span>
+                                </div>
+                                <img src="<%= product.product_img.replace('/upload/', '/upload/f_auto,q_auto,w_400/') %>" alt="<%= product.p_category %>" loading="lazy">
+                                <p class="product-brand"><%= product.brand %></p>
+                                <p class="product-features" style="color: rgb(27, 27, 27); width: 90%; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; line-height: 1.2; max-height: calc(1.5em * 2);"><%= product.p_features %></p>
+                                <p class="product-category"><%= product.p_category %></p>
+                                <p class="product-price"><%= currencySymbol %><%= product.convertedPrice %></p>
+                            </div>
+                        </a>
+                    </div>
+                <% }); %>
+            </div>
+            <button class="swiper-button-prev swiper4-prev"></button>
+            <button class="swiper-button-next swiper4-next"></button>
+        </div>
+    </section>   
+    <section id="pins" class ="swiper swiper-2">
+        <h1>BRAND NEW</h1>
+        <div class="pins-container">
+            <div class="pins swiper-wrapper">
+                <a href="/products?brand=AURA" class="swiper-slide"><img src="/img/pins/4.png" class="pin-img"></a>
+                <a href="/products?brand=AURA" class="swiper-slide"><img src="/img/pins/1.png" class="pin-img"></a>
+                <a href="/products?material=Pearl" class="swiper-slide"><img src="/img/pins/5.png" class="pin-img"></a>
+                <a href="/products?type=Automatic" class="swiper-slide"><img src="/img/pins/9.png" class="pin-img"></a>
+                <a href="/products?brand=ECPLISE" class="swiper-slide"><img src="/img/pins/11.png" class="pin-img"></a>
+                <a href="/products?brand=ECPLISE&style=Luxury" class="swiper-slide"><img src="/img/pins/13.png" class="pin-img"></a>
+            </div>
+            <div class="pins-button">
+                <button class="prev swiper-button-prev swiper2-prev"></button>
+                <button class="next swiper-button-next swiper2-next"></button>
+            </div> 
+        </div>
+        <div class="swiper-pagination pins-pagination"></div>
+    </section>
+    <% if (!user) { %>
+        <%- include('partials/signin-form') %>
+    <% } %>
+    <footer>
+        <div class="collections">
+            <div class="collections-heading">
+                <h3>COLLECTIONS</h3>
+                <button onclick="c_h_button()" class="c_h_button"><svg id="arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg></button>
+            </div>
+            <div id="collections-dropdown" class="collections-dropdown-content">
+                <a href="/products?type=Automatics"><p>Goldec Automatics</p></a>
+                <a href="/products?Brand=AURA"><p>Aura Power Pearls</p></a>
+                <a href="/products?Brand=ECPLISE"><p>Eclipse</p></a>
+                <a href="/products?material=Pearl&Stainless Steel"><p>Goldec Jewels</p></a>
+                <a href="/products?category=Wall Clock"><p>Premium Clocks</p></a>
+                <a href="/products?category=Alarm Clock"><p>Alarm Clocks</p></a>
+                <a href="/products?category=Smart Watch"><p>Smart Watches</p></a>
+            </div>
+        </div>
+        <div class="customer-service">
+            <div class="c-s-heading">
+                <h3>CUSTOMER SERVICE</h3>
+                <button onclick="c_s_h_button()" class="c_s_h_button"><svg id="c-arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg></button>
+            </div>
+            <div id="c-s-dropdown"  class="c-s-dropdown-content">
+                <p>Payment Options</p>
+                <p>Track Order</p>
+                <p>Help & Contact</p>
+                <p>FAQs</p>
+            </div>
+
+        </div>
+        <div class="f-about"> 
+            <div class="f-about-heading">
+                <h3>BRAND PROTECTION</h3>
+                <button onclick="f_about_button()" class="f_about_button">
+                    <svg id="b-arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="4p0x" fill="#999999"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg>
+                </button>
+            </div>
+            <div id="f-about-dropdown" class="f-about-dropdown-content">
+                <p>Corporate</p>
+                <p>Careers</p>
+                <p>Blog</p>
+            </div>
+        </div>       
+        <div class="f-links">
+            <p>Download Goldec Store App</p>
+            <div class="download">
+                <img src="/img/app_store.png">
+                <img src="/img/play_store.png">
+            </div>
+            <p>Follow Us On</p>
+            <div class="follow-us-on">
+                <img src="/img/facebook-1.png">
+                <img src="/img/insta-1.png">
+                <img src="/img/tweet-1.png">
+                <img src="/img/tube-1.png">
+            </div>
+            <p>Want Help? <a href="" style="color: rgb(194, 193, 193);">Click Here</a> To Chat With Us On</p>
+            <p>Operating Hours: 10:00AM To 10:00PM Monday To Sunday</p>
+        </div>
+        <div class="f-payment">
+            <img src="/img/visa.png">
+            <img src="/img/master_card.png">
+            <img src="/img/rupay.png">
+            <img src="/img/american_express.png">
+            <img src="/img/diners_club.png">
+            <img src="/img/icici.png">
+            <img src="/img/axis.png">
+        </div>
+    </footer>
+    <script> 
+        //------------- responsive -------------//
+        function rearrangeSections() {
+            let index = document.getElementById("index");
+            let offer = document.getElementById("offer");
+            let trends = document.getElementById("trends");
+            let badges = document.getElementById("badges");
+
+            if (window.matchMedia("(max-width: 600px)").matches) {
+                if (index.firstChild !== badges) {
+                    index.prepend(badges);
+                }
+            } else {
+                index.appendChild(offer);
+                index.appendChild(trends);
+                index.appendChild(badges);
+            }
+        }
+        rearrangeSections();
+        window.addEventListener("resize", rearrangeSections);
+
+        //-------------    offers    --------------//
+        let slideImages = document.querySelectorAll('.img');
+        let next = document.querySelector('.next');
+        let prev = document.querySelector('.prev');
+        let dots = document.querySelectorAll('.dot');
+        var counter = 0;
+        next.addEventListener('click', slideNext);
+        function slideNext(){
+            slideImages[counter].style.animation = 'next1 4s ease-in forwards';
+            if(counter >= slideImages.length-1){
+                counter = 0;
+            }
+            else{
+                counter++;
+            }
+            slideImages[counter].style.animation = 'next2 4s ease-in forwards';
+            indicators();
+        }
+        prev.addEventListener('click', slidePrev);
+        function slidePrev(){
+            slideImages[counter].style.animation = 'prev1 4s ease-in forwards';
+            if(counter == 0){
+                counter = slideImages.length-1;
+            }
+            else{
+                counter--;
+            }
+            slideImages[counter].style.animation = 'prev2 4s ease-in forwards';
+            indicators();
+        }
+        function autoSliding(){
+            deletInterval = setInterval(timer, 5000);
+            function timer(){
+                slideNext();
+                indicators();
+            }
+        }
+        autoSliding();
+        function indicators(){
+            for(i = 0; i < dots.length; i++){
+                dots[i].className = dots[i].className.replace(' active', '');
+            }
+            dots[counter].className += ' active';
+        }
+        function switchImage(currentImage){
+            currentImage.classList.add('active');
+            var imageId = currentImage.getAttribute('attr');
+            if(imageId > counter){
+                slideImages[counter].style.animation = 'next1 2s ease-in forwards';
+                counter = imageId;
+                slideImages[counter].style.animation = 'next2 2s ease-in forwards';
+            }
+            else if(imageId == counter){
+                return;
+            }
+            else{
+                slideImages[counter].style.animation = 'prev1 2s ease-in forwards';
+                counter = imageId;
+                slideImages[counter].style.animation = 'prev2 2s ease-in forwards';	
+            }
+            indicators();
+        }
+        //-------------- Badges ----------------//
+        const swiper1 = new Swiper('.badge-container', {
+            spaceBetween: 5,
+            direction: 'horizontal',
+            // Navigation arrows
+            navigation: {
+                nextEl: '.swiper1-next',
+                prevEl: '.swiper1-prev',
+            },
+    
+            breakpoints: {
+                312: { slidesPerView: 5},
+                600: { slidesPerView: 6},
+                820: { slidesPerView: 6},
+                1024: { slidesPerView: 6},
+                1366: { slidesPerView: 8}
+            }
+        });
+        //-------------- Pins ----------------//
+        const swiper2 = new Swiper('.pins-container', {
+            spaceBetween: 5,
+            navigation: {
+            nextEl: '.swiper2-next',
+            prevEl: '.swiper2-prev',
+            },
+            pagination: {
+                el: '.pins-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                344:{
+                    spaceBetween: 5,
+                    slidesPerView: 1.8
+                },
+                360: { slidesPerView: 2},
+                412: { slidesPerView: 2},
+                414: { slidesPerView: 2.5},
+                768: { slidesPerView: 2.3},
+                820: {
+                    spaceBetween: 10,
+                    slidesPerView: 2.6
+                },
+                912: { slidesPerView: 3},
+                1024: { slidesPerView: 3.5},
+                1366: { slidesPerView: 4.5}
+            }
+        });
+        //---------------- Trends ------------------//
+        const swiper3 = new Swiper('.trends-container', {
+            spaceBetween: 8,
+            navigation: {
+            nextEl: '.swiper3-next',
+            prevEl: '.swiper3-prev',
+            },
+            pagination: {
+                el: '.trends-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                344: {
+                    slidesPerView: 1.1,
+                    spaceBetween: 10
+                },
+                540: {
+                    slidesPerView: 1.1,
+                    spaceBetween: 14
+                },
+                768: { slidesPerView: 2},
+                1024: { slidesPerView: 2.5},
+                1366 :{ slidesPerView: 3}
+            }
+        });
+        //---------------- new products ------------------//
+        const swiper = new Swiper('.swiper-container', {     
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                344: {
+                    spaceBetween: 0,
+                    slidesPerView: 2.1
+                },
+                360: { slidesPerView: 2.3},
+                375: { slidesPerView: 2.3},
+                412: { slidesPerView: 2.5},
+                430: { slidesPerView: 2.6},
+                540: {
+                    spaceBetween: 5,
+                    slidesPerView: 3.1,
+                },
+                600: { 
+                    spaceBetween: 15,
+                    slidesPerView: 2.5
+                },
+                768: { slidesPerView: 3.2},
+                912: { slidesPerView: 3.5},
+                1024: { slidesPerView: 4,},
+                1366: { slidesPerView: 5.5}
+            }
+        });
+        //---------------- new products ------------------//
+        const swiper4 = new Swiper('.rec-products-container', { 
+            navigation: {
+                nextEl: '..swiper4-next',
+                prevEl: '..swiper4-prev',
+            },
+            breakpoints: {
+                344: {
+                    spaceBetween: 0,
+                    slidesPerView: 2.1
+                },
+                360: { slidesPerView: 2.3},
+                375: { slidesPerView: 2.3},
+                412: { slidesPerView: 2.5},
+                430: { slidesPerView: 2.6},
+                540: {
+                    spaceBetween: 5,
+                    slidesPerView: 3.1,
+                },
+                600: { 
+                    spaceBetween: 15,
+                    slidesPerView: 2.5
+                },
+                768: { slidesPerView: 3.2},
+                912: { slidesPerView: 3.5},
+                1024: { slidesPerView: 4,},
+                1366: { slidesPerView: 5.5}
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goldec</title>
+    <link rel="icon" type="image/x-icon" href="/img/Gold Luxury Business Logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/css/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="/js/script.js"></script>
+    <style>
+        #sign-in{
+            position: relative;
+            width: 30%;
+            height: 400px;
+            box-sizing: border-box;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            margin: 3% 35%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+        .s-i-h-conatainer{
+            display: flex;
+            align-items: center;
+            height: 50px;
+            width: 200px;
+            margin: 10% auto;
+        }
+        .a-signin-form{
+            width: 30%;
+            height: 400px;
+        }
+        #sign-in input {
+            width: 280px;
+            height: 40px;
+            margin: 10px 0;
+            padding: 2px 10px;
+            background-color: rgb(252, 252, 252);
+            border: 1px solid rgb(107, 107, 107);
+            border-radius: 5px;
+        }
+        #sign-in button {
+            width: 150px;
+            height: 40px;
+            margin: 10% 25%;
+            background-color: rgb(230, 172, 27);
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        #sign-in h1 {
+            color: rgb(32, 32, 32);
+            margin: 40px 0;
+        }
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+        @media (max-width: 1024px){
+            #sign-in{
+                width: 40%;
+                margin: 3% 30%;
+            }
+        }
+        @media (max-width: 900px){
+            #sign-in{
+                width: 60%;
+                margin: 5% 20%;
+            }
+        }
+        @media (max-width: 768px){
+            #sign-in{
+                position: relative;
+                width: 60%;
+                height: 400px;
+                margin: 5% 20%;
+            }
+        }
+        @media (max-width: 600px){
+            #sign-in{
+                position: relative;
+                width: 80%;
+                height: 400px;
+                margin: 10%;
+            }
+        }
+        @media (max-width: 480px){
+            #sign-in{
+                width: 80%;
+                height: 400px;
+                margin: 10%;
+            }
+            #sign-in input {
+                width: 230px;
+                height: 40px;
+            }
+        }
+        @media (max-width: 412px){
+            #sign-in{
+                width: 70%;
+                margin: 10% 17%;
+            }
+            #sign-in input { width: 200px;}
+            #sign-in button {
+                width: 100px;
+                margin: 10% 28%;
+            }
+        }
+        @media (max-width: 360px){
+            #sign-in{
+                width: 75%;
+                margin: 5% 12%;
+            }
+        }
+        @media (max-width: 344px){
+            #sign-in{ margin: 10% 12%;}
+        }
+
+    </style>
+</head>
+<body>
+    <div class="banner-container">
+        <div class="banner">
+            <p>get your first 10% off with coupon code gol-5 for non-discounted watches and avail exclusive offers</p>
+        </div>
+    </div> 
+    <section id="header">
+        <a href="/">
+            <img src="img/logo.png" class="goldec">
+        </a>
+        <form action="/search" method="get">
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass" style="color: rgb(156, 156, 156); overflow-y: visible; z-index: 1; position: relative; left: 35px; top: 12px;"></i>
+                <input type="search" name="query" placeholder="search...">
+                <i class="fa-solid fa-microphone" style="color: rgb(156, 156, 156); overflow-y: visible; z-index: 1; position: relative;left: -35px; top: 12px;"></i>
+            </div>
+        </form>
+        <div class="menu">
+            <button class="openbtn" onclick="nav_res()">&#9776;</button>
+        </div>
+        <nav id="mySidepanel" class="nav">
+            <div class="menu e-menu" style="margin-left: 20px;">
+                <button class="openbtn" onclick="nav_res()">&times;</button>
+            </div>
+            <div class="nav-display-container">
+                <a href="/about">
+                    <div class="nav-links h-about">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M182-746v-28h596v28H182Zm4 560v-240h-52v-28l48-200h596l48 200v28h-52v240h-28v-240H534v240H186Zm28-28h292v-212H214v212Zm-52-240h636-636Zm0 0h636l-41-172H203l-41 172Z"/></svg></div>
+                        <ul>About</ul>
+                    </div> 
+                </a>
+                <a href="/wishlist">
+                    <div class="nav-links wishlist-nav-icon">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="m480-190-22-20q-97-89-160.5-152t-100-110.5Q161-520 146.5-558T132-634q0-71 48.5-119.5T300-802q53 0 99 28.5t81 83.5q35-55 81-83.5t99-28.5q71 0 119.5 48.5T828-634q0 38-14.5 76t-51 85.5Q726-425 663-362T502-210l-22 20Zm0-38q96-87 158-149t98-107.5q36-45.5 50-80.5t14-69q0-60-40-100t-100-40q-48 0-88.5 27.5T494-660h-28q-38-60-78-87t-88-27q-59 0-99.5 40T160-634q0 34 14 69t50 80.5q36 45.5 98 107T480-228Zm0-273Z"/></svg></div>
+                        <ul>Wishlist</ul>
+                    </div> 
+                </a>
+                <a href="/cart">
+                    <div class="nav-links h-cart"> 
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M232-132q-25 0-42.5-17.5T172-192v-416q0-25 17.5-42.5T232-668h100q0-62 43-105t105-43q62 0 105 43t43 105h100q25 0 42.5 17.5T788-608v416q0 25-17.5 42.5T728-132H232Zm0-28h496q12 0 22-10t10-22v-416q0-12-10-22t-22-10H232q-12 0-22 10t-10 22v416q0 12 10 22t22 10Zm248-292q62 0 105-43t43-105h-28q0 50-35 85t-85 35q-50 0-85-35t-35-85h-28q0 62 43 105t105 43ZM360-668h240q0-50-35-85t-85-35q-50 0-85 35t-35 85ZM200-160v-480 480Z"/></svg></div>
+                        <ul>Cart</ul>
+                    </div> 
+                </a>
+                <a href="/my-orders">
+                    <div class="nav-links h-order">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M466-168v-304L200-626v286q0 8 4 15t12 12l250 145Zm28 0 250-145q8-5 12-12t4-15v-286L494-472v304Zm-44 23L202-288q-14-8-22-22t-8-30v-280q0-16 8-30t22-22l248-143q14-8 30-8t30 8l248 143q14 8 22 22t8 30v280q0 16-8 30t-22 22L510-145q-14 8-30 8t-30-8Zm175-435 118-68-247-143q-8-5-16-5t-16 5l-101 58 262 153Zm-145 84 117-68-263-152-117 68 263 152Z"/></svg></div>
+                        <ul>Orders</ul>
+                    </div> 
+                </a>
+                <a href="/signin">
+                    <div class="nav-links h-account">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M480-512q-44.55 0-76.27-31.72Q372-575.45 372-620t31.73-76.28Q435.45-728 480-728t76.28 31.72Q588-664.55 588-620t-31.72 76.28Q524.55-512 480-512ZM212-232v-52q0-22 13.5-41.5T262-356q55-26 109.5-39T480-408q54 0 108.5 13T698-356q23 11 36.5 30.5T748-284v52H212Zm28-28h480v-24q0-14-9.5-26.5T684-332q-48-23-99.69-35.5Q532.63-380 480-380t-104.31 12.5Q324-355 276-332q-17 9-26.5 21.5T240-284v24Zm240-280q33 0 56.5-23.5T560-620q0-33-23.5-56.5T480-700q-33 0-56.5 23.5T400-620q0 33 23.5 56.5T480-540Zm0-80Zm0 360Z"/></svg></div>
+                        <ul>Account</ul>
+                    </div> 
+                </a>
+            </div>
+        </nav>
+    </section>
+    <section id="categories">
+        <nav>
+            <a href="/products?category=Men's Watch"><ul>MEN</ul></a>
+            <a href="/products?category=Women's Watch"><ul>WOMEN</ul></a>
+            <a href="/products?category=Smart Clock"><ul>SMART WATCHES</ul></a>
+            <a href="/products?category=Alarm Clock"><ul>PREMIUM ALARMS</ul></a>
+            <a href="/products?category=Men's Watch&Women's Watch"><ul>PREMIUM COLLECTIONS</ul></a>
+            <a href="/products?category=Kid's Watch"><ul>KIDS COLLECTIONS</ul></a>
+            <a href="/products?category=Couple's Watch"><ul>COUPLES COLLECTIONS</ul></a>
+            <a href="/products?category=Wall Clock"><ul>CLOCKS</ul></a>
+            <a href="/products?category=Couple's Watch"><ul>GIFTS</ul></a>
+        </nav>
+    </section>
+    <section id="sign-in">
+        <div class="container">
+            <div class="s-i-h-conatainer">
+                <img src="/img/Logo-2.png" style="width: 60px; height: 60px; margin-left: 6%;">
+                <h2 class="text-center" style="color: goldenrod;">SIGN IN</h2>
+            </div>
+            <form id="a-signin-form" action="/signin" method="POST" class="mt-4">
+                <div class="form-group">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email-id" 
+                        required>
+                </div>
+                <div class="form-group mt-3">
+                    <div style="position: relative;">
+                        <input 
+                            type="password" 
+                            class="form-control" 
+                            id="password" 
+                            name="password" 
+                            placeholder="Enter your password" 
+                            required 
+                            minlength="8">
+                        <i class="fa fa-eye password-toggle" id="toggle-password"></i>
+                    </div>
+                </div>
+                <button type="submit" id="submit-btn" class="btn btn-primary btn-block">Sign In</button>
+            </form>
+            <p class="text-center" style="text-align: center; font-size: 14px;"> Don't have an account? <a href="/signup">Sign Up</a></p>
+        </div>
+    </section>
+    <footer>
+        <div class="collections">
+            <div class="collections-heading">
+                <h3>COLLECTIONS</h3>
+                <button onclick="c_h_button()" class="c_h_button"><svg id="arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg></button>
+            </div>
+            <div id="collections-dropdown" class="collections-dropdown-content">
+                <a href="/products?type=Automatics"><p>Goldec Automatics</p></a>
+                <a href="/products?brand=AURA"><p>Aura Power Pearls</p></a>
+                <a href="/products?brand=ECLIPSE"><p>Eclipse</p></a>
+                <a href="/products?material=Pearl&Stainless Steel"><p>Goldec Jewels</p></a>
+                <a href="/products?category=Wall Clock"><p>Premium Clocks</p></a>
+                <a href="/products?category=Alarm Clock"><p>Alarm Clocks</p></a>
+                <a href="/products?category=Smart Watch"><p>Smart Watches</p></a>
+            </div>
+        </div>
+        <div class="customer-service">
+            <div class="c-s-heading">
+                <h3>CUSTOMER SERVICE</h3>
+                <button onclick="c_s_h_button()" class="c_s_h_button"><svg id="c-arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg></button>
+            </div>
+            <div id="c-s-dropdown"  class="c-s-dropdown-content">
+                <p>Payment Options</p>
+                <p>Track Order</p>
+                <p>Help & Contact</p>
+                <p>FAQs</p>
+            </div>
+
+        </div>
+        <div class="f-about"> 
+            <div class="f-about-heading">
+                <h3>BRAND PROTECTION</h3>
+                <button onclick="f_about_button()" class="f_about_button">
+                    <svg id="b-arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="4p0x" fill="#999999"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg>
+                </button>
+            </div>
+            <div id="f-about-dropdown" class="f-about-dropdown-content">
+                <p>Corporate</p>
+                <p>Careers</p>
+                <p>Blog</p>
+            </div>
+        </div>
+        
+        <div class="f-links">
+            <p>Download Goldec Store App</p>
+            <div class="download">
+                <img src="/img/app_store.png">
+                <img src="/img/play_store.png">
+            </div>
+            <p>Follow Us On</p>
+            <div class="follow-us-on">
+                <img src="/img/facebook-1.png">
+                <img src="/img/insta-1.png">
+                <img src="/img/tweet-1.png">
+                <img src="/img/tube-1.png">
+            </div>
+            <p>Want Help? <a href="" style="color: rgb(194, 193, 193);">Click Here</a> To Chat With Us On</p>
+            <p>Operating Hours: 10:00AM To 10:00PM Monday To Sunday</p>
+        </div>
+        <div class="f-payment">
+            <img src="/img/visa.png">
+            <img src="/img/master_card.png">
+            <img src="/img/rupay.png">
+            <img src="/img/american_express.png">
+            <img src="/img/diners_club.png">
+            <img src="/img/icici.png">
+            <img src="/img/axis.png">
+        </div>
+    </footer>
+    <script>
+        const togglePassword = document.getElementById('toggle-password');
+        const passwordField = document.getElementById('password');
+        
+        togglePassword.addEventListener('click', function (e) {
+            const type = passwordField.type === 'password' ? 'text' : 'password';
+            passwordField.type = type;
+            this.classList.toggle('fa-eye-slash');
+        });
+
+        // Password validation for strong password (8 chars, special char, number, upper/lower case)
+        document.getElementById('signin-form').addEventListener('submit', function(e) {
+            const password = document.getElementById('password').value;
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=]).{8,}$/;
+            
+            if (!passwordRegex.test(password)) {
+                alert('Password must be at least 8 characters long and include a special character, number, and both uppercase and lowercase letters.');
+                e.preventDefault(); // Prevent form submission
+            }
+        });
+    </script>
+</body>
+</html>

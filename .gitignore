@@ -1,0 +1,20 @@
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+
+# Logs
+*.log
+
+# OS-specific files
+.DS_Store   # macOS-specific
+Thumbs.db   # Windows-specific
+
+# IDE/Editor specific files
+.vscode/     # VS Code folder
+.idea/       # JetBrains IDEs folder
+
+# Build output
+/dist/
+public/img/upload/

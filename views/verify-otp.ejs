@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify OTP</title>
+    <link rel="stylesheet" href="/css/stylesheet.css"> <!-- Add your stylesheet -->
+</head>
+<body>
+    <div class="otp-container" style="text-align: center; margin-top: 50px;">
+        <h2>Verify OTP</h2>
+        <p style="margin-bottom: 20px;">Please enter the OTP sent to your email or mobile.</p>
+        <h2>Verify OTP</h2>
+        <form action="/verify-otp" method="POST">
+            <label for="otp">Enter OTP:</label>
+            <input type="text" name="otp" placeholder="Enter your OTP" required>
+            <button type="submit">Verify OTP</button>
+        </form>
+        <p>check console for OTP</p>
+        <!-- Resend OTP Link -->
+        <p style="margin-top: 20px;">
+            Didn't receive the OTP? 
+            <a href="/resend-otp" style="color: #007bff; text-decoration: none;">Resend OTP</a>
+        </p>
+    </div>
+</body>
+</html>

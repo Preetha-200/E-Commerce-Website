@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Goldec</title>
+    <link rel="icon" type="image/x-icon" href="/img/Gold Luxury Business Logo.png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/css/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-...your-integrity-hash..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="/js/script.js"></script>
+    <style>
+        /*-------------  Modal  --------------*/ 
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        .modal-content {
+            display: flex;
+            margin: auto;
+            animation-name: zoom;
+            animation-duration: 0.3s;
+        }
+        .m_p_d_indicator{
+            display: flex;
+            flex-wrap: wrap;
+            width: 500px;
+            height: 400px;
+            margin-left: 7%;
+            margin-top: 7%;
+        }
+        .m_p_d_indicator .m_indicator{
+            width: 150px;
+            height: 150px;
+            cursor: pointer;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: border-color 0.3s;
+            margin-left: 10%;
+        }
+        .m_p_d_indicator .m_indicator .active{
+            opacity: 50%;
+        }
+        .m_p_d_indicator .m_indicator img{
+            width: 98%;
+            height: 98%;
+            margin-left: 2%;
+            object-fit: cover;
+            border: 0.2px solid rgb(61, 61, 61);
+            border-radius: 10%;
+        }
+        .m_product-image-container {
+            width: 550px;
+            height: 550px;
+            margin-left: 10%;
+        }
+        .m_product-image-container img {
+            width: 100%;
+            height: 100%;
+            border: 0.2px solid rgb(61, 61, 61);
+            border-radius: 5%;
+        }
+        @keyframes zoom {
+            from { transform: scale(0.5); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #bbb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .zoom-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /*-------------  additional Product  --------------*/ 
+
+        #similar-products, #recently-viewed-products{
+            width: 100%;
+            height: 420px;
+            margin-left: 25%;
+            margin: 50px 0;   
+        }
+        #similar-products h2, #recently-viewed-products h2{
+            margin-left: 3%;
+            font-family: "Work Sans";  
+            color: rgb(39, 39, 39);
+        }
+        .similar-product-container, .r-v-container{
+            position: relative;
+            width: 100%;
+        }
+        .similar-product-grid, .r-v-product-grid{
+            position: relative;
+            margin-left: 3%;
+        }
+        .product-brand{
+            color: rgb(243, 97, 0); 
+            font-size: 13px;   
+        }
+        .product-category{
+            color: grey; 
+            font-size: 13px;
+        }
+        .product-price{
+            color: rgb(27, 27, 27); 
+            font-size: 13px;
+        }  
+        .product-features{font-size: 14px;}                           
+        .rating{
+            position: absolute;
+            background-color:rgb(255, 255, 255, 0.7);
+            width: 50px;
+            height: 15px;
+            padding: 5px;
+            font-size: 14px;
+            z-index: 99;
+            top: 200px;
+            left: 15px;
+        }
+        .wishlist-icon {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background-color: rgb(255, 255, 255);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .wishlist-icon i{
+            position: relative;
+            top: 5px;
+            left: 5px;
+            font-size: 1.6rem;
+        }
+        .similar-products-button{padding-top: 5%;}
+        .s-prev-btn, .s-next-btn, .r-prev-btn, .r-next-btn  {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        .s-prev-btn:hover, .s-next-btn:hover, .r-prev-btn:hover, .r-next-btn:hover { background-color: rgba(0, 0, 0, 0.8);}
+        .s-prev-btn::after, .s-next-btn::after,  .r-prev-btn::after, .r-next-btn::after {font-size: 16px; }
+        .product p{ font-weight: normal;}
+        .product{
+            width: 240px;
+            height: 360px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            margin: 0;
+        }
+        .product img{
+            width: 220px;
+            margin: 10px;
+        }
+        .red-heart { color: red !important;}
+        .grey-heart { color: grey !important;}      
+       
+        /*----------------- Media Query---------------------*/
+        @media (max-width: 1024px){
+            .modal-content {
+                display: grid;
+                grid-template-rows: 80% 20%;
+                margin: 0;
+                animation-name: zoom;
+                animation-duration: 0.3s;
+            }
+            .m_p_d_indicator{
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                margin-left: 0;
+                margin: 0;
+                height: 250px;
+            }
+            .m_product-image-container {
+                width: 700px;
+                height: 700px;
+                margin-left: 0;
+                margin: 10% 15%;
+            }
+            .m_p_d_indicator .m_indicator{
+                width: 200px;
+                height: 200px;
+                margin: 10px;
+            }
+        }
+        @media (max-width: 912px){
+            .m_product-image-container {
+                width: 650px;
+                height: 650px;
+            }
+        }
+        @media (max-width: 853px){
+            .m_product-image-container {
+                width: 620px;
+                height: 620px;
+                margin: 14%;
+            }
+            .m_p_d_indicator .m_indicator{
+                width: 180px;
+                height: 180px;
+            }
+            .m_p_d_indicator .m_indicator img{
+                width: 160px;
+                height: 160px;
+            }
+        }
+        @media (max-width: 820px){
+            .m_product-image-container {
+                width: 600px;
+                height: 600px;
+            }
+            .m_p_d_indicator .m_indicator{
+                width: 160px;
+                height: 160px;
+            }
+            .m_p_d_indicator .m_indicator img{
+                width: 98%;
+                height: 98%;
+            }
+        }
+        @media (max-width: 768px){
+            .modal { background-color: white;}
+            .modal-content { grid-template-rows: 80% 10%;}
+            .m_product-image-container {
+                width: 650px;
+                height: 650px;
+                margin: 5% 8%;
+            }
+            .m_p_d_indicator{ 
+                height: 160px;
+                margin: 2% auto;
+            }
+            .m_p_d_indicator .m_indicator{
+                width: 140px;
+                height: 140px;
+                margin: 1%;
+            }
+            .m_p_d_indicator .m_indicator img{
+                width: 98%;
+                height: 98%;
+                margin: 0;
+            }
+            .close { color: rgb(0, 0, 0);}
+        }
+        @media (max-width: 600px){
+            .m_product-image-container {
+                width: 550px;
+                height: 550px;
+                margin: 20% 4%;
+            }
+            .m_p_d_indicator{ 
+                height: 130px;
+                margin-top: 0;
+            }
+            .m_p_d_indicator .m_indicator{
+                width: 110px;
+                height: 110px;
+            }
+            .close { margin-bottom: 30%;}
+        }
+        @media (max-width: 540px){
+            .modal-content { grid-template-rows: 80% 5%;}
+            .m_product-image-container {
+                width: 450px;
+                height: 450px;
+                margin: 3% 8%;
+                margin-bottom: 0;
+            }
+            .m_p_d_indicator{ 
+                height: 130px;
+                margin-top: 0;
+            }
+            .m_p_d_indicator .m_indicator{
+                width: 100px;
+                height: 100px;
+            }
+            .close { margin-bottom: 30%;}
+            #similar-products, #recently-viewed-products{ height: 300px;}
+            #similar-products h2, #recently-viewed-products h2{ font-size: 18px;}
+            .product-brand, .product-features{ font-size: 13px;}
+            .product-category{ display: none;}
+            .product-price{ font-size: 12px;}                             
+            .rating{
+                width: 45px;
+                height: 12px;
+                padding: 3px;
+                font-size: 13px;
+                top: 54%;
+                left: 5%;
+            }
+            .wishlist-icon {
+                top: 3%;
+                right: 5%;
+                background-color: rgb(255, 255, 255);
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                cursor: pointer;
+            }
+            .wishlist-icon i{
+                position: relative;
+                top: 15%;
+                left: 15%;
+                font-size: 20px;
+            }
+            .s-prev-btn, .s-next-btn, .r-prev-btn, .r-next-btn  {
+               display: none;
+            }
+            .product p{ font-weight: normal;}
+            .product{
+                width: 170px;
+                height: 270px;
+                border-radius: 5px;
+                margin: 0;
+            }
+            .product img{
+                width: 98%;
+                margin: 1%;
+            }  
+        }
+        @media (max-width: 430px){
+            .modal-content { grid-template-rows: 80% 5%;}
+            .m_product-image-container {
+                width: 430px;
+                height: 430px;
+                margin: 25% 0%;
+            }
+            .m_product-image-container img{
+                border: none;
+                border-radius: 0;
+            }
+            .m_p_d_indicator{ height: 100px;}
+            .m_p_d_indicator .m_indicator{
+                width: 90px;
+                height: 90px;
+            }
+            #similar-products, #recently-viewed-products{
+                width: 100%;
+                height: 300px;
+                margin: 30px 2%; 
+            }
+            #similar-products h2, #recently-viewed-products h2{ margin-left: 3%;}
+            .product-price{
+                font-size: 11px;
+                margin: 3px 10px;
+            }                            
+            .rating{
+                width: 45px;
+                height: 12px;
+                padding: 3px;
+                font-size: 13px;
+                top: 54%;
+                left: 5%;
+            }
+            .wishlist-icon {
+                width: 25px;
+                height: 25px;
+
+            }
+            .wishlist-icon i{ font-size: 18px;}
+            .product{
+                width: 160px;
+                height: 250px;
+                border-radius: 5px;
+                margin: 0;
+            }
+            .product img{
+                width: 96%;
+                margin: 2%;
+            }  
+        }
+        @media (max-width: 414px){
+            .m_product-image-container {
+                width: 414px;
+                height: 414px;
+                margin: 25% 0%;
+            }
+        }
+        @media (max-width: 390px){
+            .m_product-image-container {
+                width: 390px;
+                height: 390px;
+                margin: 25% 0%;
+            }
+            .m_p_d_indicator .m_indicator{
+                width: 80px;
+                height: 80px;
+            }
+        }
+        @media (max-width: 375px){
+            .m_product-image-container {
+                width: 375px;
+                height: 375px;
+                margin: 15% 0%;
+            }
+            .m_p_d_indicator .m_indicator{
+                width: 80px;
+                height: 80px;
+            }
+        }
+        @media (max-width: 360px){
+            .m_product-image-container{
+                width: 360px;
+                height: 360px;
+            }
+            .m_p_d_indicator .m_indicator{
+                width: 70px;
+                height: 70px;
+            }
+        }
+        @media (max-width: 344px){
+            .m_product-image-container {
+                width: 344px;
+                height: 344px;
+                margin: 20% 0%;
+            }
+            .m_p_d_indicator .m_indicator{
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>  
+</head>
+<body>  
+    <div class="banner-container">
+        <div class="banner">
+            <p>get your first 10% off with coupon code gol-5 for non-discounted watches and avail exclusive offers</p>
+        </div>
+    </div> 
+    <section id="header">
+        <a href="/">
+            <img src="img/logo.png" class="goldec">
+        </a>
+        <form action="/search" method="get">
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass" style="color: rgb(156, 156, 156); overflow-y: visible; z-index: 1; position: relative; left: 35px; top: 12px;"></i>
+                <input type="search" name="query" placeholder="search...">
+                <i class="fa-solid fa-microphone" style="color: rgb(156, 156, 156); overflow-y: visible; z-index: 1; position: relative;left: -35px; top: 12px;"></i>
+            </div>
+        </form>
+        <div class="menu">
+            <button class="openbtn" onclick="nav_res()">&#9776;</button>
+        </div>
+        <nav id="mySidepanel" class="nav">
+            <div class="menu e-menu" style="margin-left: 20px;">
+                <button class="openbtn" onclick="nav_res()">&times;</button>
+            </div>
+            <div class="nav-display-container">
+                <a href="/about">
+                    <div class="nav-links h-about">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M182-746v-28h596v28H182Zm4 560v-240h-52v-28l48-200h596l48 200v28h-52v240h-28v-240H534v240H186Zm28-28h292v-212H214v212Zm-52-240h636-636Zm0 0h636l-41-172H203l-41 172Z"/></svg></div>
+                        <ul>About</ul>
+                    </div> 
+                </a>
+                <a href="/wishlist">
+                    <div class="nav-links wishlist-nav-icon">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="m480-190-22-20q-97-89-160.5-152t-100-110.5Q161-520 146.5-558T132-634q0-71 48.5-119.5T300-802q53 0 99 28.5t81 83.5q35-55 81-83.5t99-28.5q71 0 119.5 48.5T828-634q0 38-14.5 76t-51 85.5Q726-425 663-362T502-210l-22 20Zm0-38q96-87 158-149t98-107.5q36-45.5 50-80.5t14-69q0-60-40-100t-100-40q-48 0-88.5 27.5T494-660h-28q-38-60-78-87t-88-27q-59 0-99.5 40T160-634q0 34 14 69t50 80.5q36 45.5 98 107T480-228Zm0-273Z"/></svg></div>
+                        <ul>Wishlist</ul>
+                    </div> 
+                </a>
+                <a href="/cart">
+                    <div class="nav-links h-cart"> 
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M232-132q-25 0-42.5-17.5T172-192v-416q0-25 17.5-42.5T232-668h100q0-62 43-105t105-43q62 0 105 43t43 105h100q25 0 42.5 17.5T788-608v416q0 25-17.5 42.5T728-132H232Zm0-28h496q12 0 22-10t10-22v-416q0-12-10-22t-22-10H232q-12 0-22 10t-10 22v416q0 12 10 22t22 10Zm248-292q62 0 105-43t43-105h-28q0 50-35 85t-85 35q-50 0-85-35t-35-85h-28q0 62 43 105t105 43ZM360-668h240q0-50-35-85t-85-35q-50 0-85 35t-35 85ZM200-160v-480 480Z"/></svg></div>
+                        <ul>Cart</ul>
+                    </div> 
+                </a>
+                <a href="/my-orders">
+                    <div class="nav-links h-order">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M466-168v-304L200-626v286q0 8 4 15t12 12l250 145Zm28 0 250-145q8-5 12-12t4-15v-286L494-472v304Zm-44 23L202-288q-14-8-22-22t-8-30v-280q0-16 8-30t22-22l248-143q14-8 30-8t30 8l248 143q14 8 22 22t8 30v280q0 16-8 30t-22 22L510-145q-14 8-30 8t-30-8Zm175-435 118-68-247-143q-8-5-16-5t-16 5l-101 58 262 153Zm-145 84 117-68-263-152-117 68 263 152Z"/></svg></div>
+                        <ul>Orders</ul>
+                    </div> 
+                </a>
+                <a href="/signin">
+                    <div class="nav-links h-account">
+                        <div class="svg"><svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 -960 960 960" width="30px" fill="#434343"><path d="M480-512q-44.55 0-76.27-31.72Q372-575.45 372-620t31.73-76.28Q435.45-728 480-728t76.28 31.72Q588-664.55 588-620t-31.72 76.28Q524.55-512 480-512ZM212-232v-52q0-22 13.5-41.5T262-356q55-26 109.5-39T480-408q54 0 108.5 13T698-356q23 11 36.5 30.5T748-284v52H212Zm28-28h480v-24q0-14-9.5-26.5T684-332q-48-23-99.69-35.5Q532.63-380 480-380t-104.31 12.5Q324-355 276-332q-17 9-26.5 21.5T240-284v24Zm240-280q33 0 56.5-23.5T560-620q0-33-23.5-56.5T480-700q-33 0-56.5 23.5T400-620q0 33 23.5 56.5T480-540Zm0-80Zm0 360Z"/></svg></div>
+                        <ul>Account</ul>
+                    </div> 
+                </a>
+            </div>
+        </nav>
+    </section>
+    <section id="categories">
+        <nav>
+            <a href="/products?category=Men's Watch"><ul>MEN</ul></a>
+            <a href="/products?category=Women's Watch"><ul>WOMEN</ul></a>
+            <a href="/products?category=Smart Clock"><ul>SMART WATCHES</ul></a>
+            <a href="/products?category=Alarm Clock"><ul>PREMIUM ALARMS</ul></a>
+            <a href="/products?category=Men's Watch&Women's Watch"><ul>PREMIUM COLLECTIONS</ul></a>
+            <a href="/products?category=Kid's Watch"><ul>KIDS COLLECTIONS</ul></a>
+            <a href="/products?category=Couple's Watch"><ul>COUPLES COLLECTIONS</ul></a>
+            <a href="/products?category=Wall Clock"><ul>CLOCKS</ul></a>
+            <a href="/products?category=Couple's Watch"><ul>GIFTS</ul></a>
+        </nav>
+    </section>
+    <section id="product_details">
+        <div id="h_nav">
+            <a href="/"><p>Home</p></a>
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#999999"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/></svg>
+            <a href="/products?brand=<%= product.brand%>"><p><%= product.brand%></p></a>
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#999999"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/></svg>
+            <a href="/products?category=<%= product.p_category%>"><p><%= product.p_category%></p></a>
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" viewBox="0 -960 960 960" width="18px" fill="#999999"><path d="m321-80-71-71 329-329-329-329 71-71 400 400L321-80Z"/></svg>
+            <p style="width: 150px; padding-top: 1px; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 1; line-height: 1;"><%= product.p_features%></p>
+        </div>
+        <div class="product-details">
+            <div class="product-slide-container">
+                <div class="p_d_indicator">
+                    <div class="indicator" attr="0">
+                        <img src="<%= product.product_img%>" >
+                    </div>
+                    <div class="indicator" attr="1">
+                        <img src="<%= product.product_img_s1 %>">
+                    </div>
+                    <div class="indicator" attr="2">
+                        <img src="<%= product.product_img_s2 %>">
+                    </div>
+                    <div class="indicator" attr="3">
+                        <img src="<%= product.product_img_s3 %>">
+                    </div>
+                </div>
+                <div class="product-image-container">
+                    <img class="p_img" src="<%= product.product_img %>">
+                </div>
+            </div>
+            <div class="p_d_details_wrapper">
+                <div class="p_d_main">
+                    <div class="p_brand-container">
+                        <p><%= product.brand %></p>
+                        <div class="wishlist-icon" data-id="<%= product.id %>" data-is-in-wishlist="<%= isInWishlist %>">
+                            <i class="<%= isInWishlist ? 'fas red-heart' : 'far grey-heart' %> fa-heart"></i>
+                        </div>
+                    </div>
+                    <div class="product-description">
+                        <p><%= product.p_features %></p>
+                        <p style="color: grey; margin: 10px 0;"><%= product.p_category %></p>
+                    </div>
+                    <div class="p_d_ratings">
+                        <div class="rating">
+                            <% 
+                                // Calculate the number of filled and empty stars
+                                const filledStars = Math.round(product.rating || 0);
+                                const emptyStars = 5 - filledStars; 
+                            %>
+                            <% for (let i = 0; i < filledStars; i++) { %>
+                                <i class="fas fa-star" style="color: goldenrod;"></i>
+                            <% } %>
+                            <% for (let i = 0; i < emptyStars; i++) { %>
+                                <i class="far fa-star" style="color: goldenrod;"></i>
+                            <% } %>
+                            <span class="rating-value">
+                                (<%= product.rating ? parseFloat(product.rating).toFixed(1) : "N/A" %>)
+                            </span>
+                        </div>
+                    </div>
+                    <div class="product_price_details">
+                        <p style="margin-bottom: 15px;"><%= currencySymbol %><%= product.convertedPrice %></p>
+                        <p style="color: grey; font-size: 16px; margin-bottom: 10px;">Inclusive of all taxes*</p>
+                    </div>
+                </div>
+                <div class="p_d_buttons">
+                    <form action="/add-to-cart" method="POST">
+                        <input type="hidden" name="productId" value="<%= product.id %>">
+                        <button type="submit" id="addToCartBtn" class="Add_to_cart">Add to Cart</button>
+                    </form>
+                    <form action="/order-confirmation" method="POST">
+                        <input type="hidden" name="productId" value="<%= product.id %>">
+                        <input type="hidden" name="productName" value="<%= product.brand %>">
+                        <input type="hidden" name="productImage" value="<%= product.product_img %>">
+                        <input type="hidden" name="productFeature" value="<%= product.p_features %>">
+                        <input type="hidden" name="productRating" value="<%= product.rating %>">
+                        <input type="hidden" name="productPrice" value="<%= product.convertedPrice %>">
+                        <button type="submit" class="buy_now">Buy Now</button>
+                    </form>                                      
+                </div>
+                <div class="p_g_details_sub">
+                    <div class="p_d_other_specifications">
+                        <div class="p_d_o_s_button">
+                            <p>Product Specification</p>
+                            <button onclick="p_d_s_button()" class="s_dropbtn"><svg id="specification-arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#434343"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg></button>
+                        </div>
+                        <div id="p_s_Dropdown" class="p_s_dropdown-content">
+                            <table>
+                                <% if (product.style) { %>
+                                <tr>
+                                    <td>Style</td>
+                                    <td>: <%= product.style %></td>
+                                </tr>
+                                <% } %>
+                                <% if (product.product_type) { %>
+                                <tr>
+                                    <td>Type</td>
+                                    <td>: <%= product.product_type %></td>
+                                </tr>
+                                <% } %>
+                                <% if (product.p_category) { %>
+                                <tr>
+                                    <td>Category</td>
+                                    <td>: <%= product.p_category %></td>
+                                </tr>
+                                <% } %>
+                                <% if (product.color) { %>
+                                <tr>
+                                    <td>Color</td>
+                                    <td>: <%= product.color %></td>
+                                </tr>
+                                <% } %>
+                                <% if (product.dial_color) { %>
+                                <tr>
+                                    <td>Dial Color</td>
+                                    <td>: <%= product.dial_color %></td>
+                                </tr>
+                                <% } %>
+                                <% if (product.connectivity) { %>
+                                <tr>
+                                    <td>Connection</td>
+                                    <td>: <%= product.Connectivity %></td>
+                                </tr>
+                                <% } %>                        
+                                <% if (product.shape) { %>
+                                <tr>
+                                    <td>Shape</td>
+                                    <td>: <%= product.shape %></td>
+                                </tr>
+                                <% } %>                        
+                                <% if (product.product_size) { %>
+                                <tr>
+                                    <td>Size</td>
+                                    <td>: <%= product.product_size %></td>
+                                </tr>
+                                <% } %>                        
+                                <% if (product.material) { %>
+                                <tr>
+                                    <td>Material</td>
+                                    <td>: <%= product.material %></td>
+                                </tr>
+                                <% } %>                        
+                                <% if (product.source) { %>
+                                <tr>
+                                    <td>Power Source</td>
+                                    <td>: <%= product.source %></td>
+                                </tr>
+                                <% } %> 
+                            </table>
+                        </div>     
+                        <% if (product.p_description) { %>                
+                        <div class="p_d_o_s_button">
+                            <p>Product Description</p>
+                            <button onclick="p_s_d_button()" class="d_dropbtn"><svg id="description-arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#434343"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg></button>
+                        </div>
+                        <div id="p_d_Dropdown" class="p_d_dropdown-content">
+                            <p><%= product.p_description %></p> 
+                        </div>
+                        <% } %>
+                    </div>
+                    <div class="p_g_d_s_sub">
+                        <div class="p_delivery_button">
+                            <button>
+                                <svg xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#434343"><path d="M222.56-195.54q-43.07 0-73.38-30.42-30.31-30.42-30.31-73.89H67.69v-401.69q0-24.58 16.94-41.52Q101.58-760 126.15-760h535.23v146.72h87.44l143.49 192.46v120.97h-61.69q0 43.47-30.46 73.89-30.45 30.42-73.95 30.42-43.3 0-73.5-30.42-30.2-30.42-30.2-73.89H326.97q0 43.7-30.66 74-30.67 30.31-73.75 30.31Zm.36-33.84q29.36 0 49.79-20.43 20.42-20.42 20.42-49.78t-20.42-49.78q-20.43-20.42-49.79-20.42t-49.78 20.42q-20.42 20.42-20.42 49.78t20.42 49.78q20.42 20.43 49.78 20.43ZM101.54-333.69h22.77q8.54-28.87 36.18-49.49 27.64-20.61 62.12-20.61 32.95 0 61.33 20.3 28.39 20.31 36.93 49.8h306.67v-392.46H126.15q-9.23 0-16.92 7.69-7.69 7.69-7.69 16.92v367.85Zm625.02 104.31q29.36 0 49.79-20.43 20.42-20.42 20.42-49.78t-20.42-49.78q-20.43-20.42-49.79-20.42-29.35 0-49.78 20.42-20.42 20.42-20.42 49.78t20.42 49.78q20.43 20.43 49.78 20.43Zm-65.18-186.26h193.49l-124.51-163.8h-68.98v163.8ZM364.62-526.77Z"/></svg>                        
+                                <div class="p">
+                                    <p>Delivery Available</p>
+                                    <p style="color: rgb(122, 204, 0);">Delivery by 7 days</p>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="p_general_details">
+                            <div class="p_warranty">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 -960 960 960" width="38px" fill="#434343"><path d="M480-321.49q65.72 0 111.81-46.34 46.09-46.35 46.09-111.55 0-65.72-46.09-111.81T480-637.28q-65.72 0-111.81 46.09T322.1-479.38q0 65.2 46.09 111.55 46.09 46.34 111.81 46.34Zm68.26-67.95-84.93-83.18v-124.1h31.08v112.31l75.54 73.28-21.69 21.69ZM480-121.69q-120.69-36.28-200.35-147.27Q200-379.95 200-518.1v-214.36l280-104.62 280 104.62v214.36q0 138.15-79.65 249.14Q600.69-157.97 480-121.69Zm0-36Q587.23-191.97 656.69-293t69.46-225.1v-191.11l-246.15-92-246.15 92v191.11q0 124.07 69.46 225.1T480-157.69Zm0-321.54Z"/></svg>
+                                <p>24 Months Warranty</p>
+                            </div>
+                            <div class="p_free_shipping">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 -960 960 960" width="38px" fill="#434343"><path d="M222.56-195.54q-43.07 0-73.38-30.42-30.31-30.42-30.31-73.89H67.69v-401.69q0-24.58 16.94-41.52Q101.58-760 126.15-760h535.23v146.72h87.44l143.49 192.46v120.97h-61.69q0 43.47-30.46 73.89-30.45 30.42-73.95 30.42-43.3 0-73.5-30.42-30.2-30.42-30.2-73.89H326.97q0 43.7-30.66 74-30.67 30.31-73.75 30.31Zm.36-33.84q29.36 0 49.79-20.43 20.42-20.42 20.42-49.78t-20.42-49.78q-20.43-20.42-49.79-20.42t-49.78 20.42q-20.42 20.42-20.42 49.78t20.42 49.78q20.42 20.43 49.78 20.43ZM101.54-333.69h22.77q8.54-28.87 36.18-49.49 27.64-20.61 62.12-20.61 32.95 0 61.33 20.3 28.39 20.31 36.93 49.8h306.67v-392.46H126.15q-9.23 0-16.92 7.69-7.69 7.69-7.69 16.92v367.85Zm625.02 104.31q29.36 0 49.79-20.43 20.42-20.42 20.42-49.78t-20.42-49.78q-20.43-20.42-49.79-20.42-29.35 0-49.78 20.42-20.42 20.42-20.42 49.78t20.42 49.78q20.43 20.43 49.78 20.43Zm-65.18-186.26h193.49l-124.51-163.8h-68.98v163.8ZM364.62-526.77Z"/></svg>
+                                <p>Free Shiping</p>
+                            </div>
+                            <div class="p_cash_on_delivery">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 -960 960 960" width="38px" fill="#434343"><path d="M193.85-290.21v96.36V-766.15v475.94ZM218.46-160q-23.91 0-41.18-17.28Q160-194.55 160-218.46v-523.08q0-23.91 17.28-41.18Q194.55-800 218.46-800h523.08q23.91 0 41.18 17.28Q800-765.45 800-741.54v128.05h-33.85v-128.05q0-10.77-6.92-17.69-6.92-6.92-17.69-6.92H218.46q-10.77 0-17.69 6.92-6.92 6.92-6.92 17.69v523.08q0 10.77 6.92 17.69 6.92 6.92 17.69 6.92h523.08q10.77 0 17.69-6.92 6.92-6.92 6.92-17.69v-127.9H800v127.9q0 23.91-17.28 41.18Q765.45-160 741.54-160H218.46Zm331.41-164.05q-25.63 0-44.11-18.27t-18.48-44.24v-186.72q0-25.98 18.48-44.25 18.48-18.26 44.11-18.26h227.77q26.26 0 44.72 18.26 18.46 18.27 18.46 44.25v186.72q0 25.97-18.46 44.24-18.46 18.27-44.72 18.27H549.87Zm232.49-33.85q10.26 0 17.44-6.92 7.17-6.92 7.17-17.69v-194.82q0-10.26-7.17-17.44-7.18-7.18-17.44-7.18H545.74q-10.25 0-17.43 7.18t-7.18 17.44v194.82q0 10.77 7.18 17.69 7.18 6.92 17.43 6.92h236.62Zm-138.31-60.97q25.16 0 43.07-17.88 17.91-17.87 17.91-43.4 0-25.84-18.06-43.41-18.05-17.57-43.07-17.57-25.67 0-43.66 17.57-17.98 17.57-17.98 43.41 0 25.53 18.02 43.4 18.03 17.88 43.77 17.88Z"/></svg>
+                                <p>Pay on Delivery Available</p>
+                            </div>
+                            <div class="p_easy_return">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 -960 960 960" width="38px" fill="#434343"><path d="M463.08-162.38v-308.11L193.85-626.21v294.26q0 6.16 3.07 11.54 3.08 5.38 9.23 9.23l256.93 148.8Zm33.84 0 256.93-148.8q6.15-3.85 9.23-9.23 3.07-5.38 3.07-11.54v-294.41L496.92-470.49v308.11Zm-46.15 31.79L189.23-281.64q-13.87-7.72-21.55-21.51-7.68-13.8-7.68-29.23v-295.24q0-15.43 7.68-29.23 7.68-13.79 21.55-21.51l261.54-151.05q13.87-7.72 29.23-7.72 15.36 0 29.23 7.72l261.54 151.05q13.87 7.72 21.55 21.51 7.68 13.8 7.68 29.23v295.24q0 15.43-7.68 29.23-7.68 13.79-21.55 21.51L509.23-130.59q-13.87 7.72-29.23 7.72-15.36 0-29.23-7.72Zm178.82-455.49 116.49-67.33-253.77-146.8q-6.16-3.33-12.31-3.33t-12.31 3.33L364.72-741l264.87 154.92ZM480-499.03l116.1-67.71-266.23-153.72-116.1 67.05L480-499.03Z"/></svg>
+                                <p>Easy Return</p>
+                            </div>
+                            <div class="p_services">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="38px" viewBox="0 -960 960 960" width="38px" fill="#434343"><path d="M426.31-806.15h107.38-107.38Zm0 652.3h107.38-107.38ZM400.41-120l-42.67-154.15q-52.41-28.57-85.07-83.47Q240-412.51 240-480t32.67-122.46q32.66-54.98 85.07-83.39L400.41-840h159.18l42.67 154.15q52.41 28.41 85.07 83.39Q720-547.49 720-480t-32.67 122.38q-32.66 54.9-85.07 83.47L559.59-120H400.41Zm79.52-153.85q85.99 0 146.11-60.04 60.11-60.05 60.11-146.04t-60.04-146.11q-60.05-60.11-146.04-60.11t-146.11 60.04q-60.11 60.05-60.11 146.04t60.04 146.11q60.05 60.11 146.04 60.11Zm-80.7-431.12q21.74-6.85 41.35-10.57 19.6-3.72 39.42-3.72t39.42 3.72q19.61 3.72 41.35 10.57l-27.26-101.18h-107.2l-27.08 101.18Zm27.26 551.12h107.2l27.08-101.18q-21.51 6.7-41.23 9.99-19.72 3.3-39.54 3.3t-39.54-3.3q-19.72-3.29-41.23-9.99l27.26 101.18ZM438-385.67 357.33-466 381-490.1l57 56.77 141-141L603.18-551 438-385.67Z"/></svg>
+                                <p>Serviced Across Country</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>      
+        <div id="similar-products">
+            <h2>Similar Products</h2>
+            <div class="similar-product-container swiper-container">
+                <div class="similar-product-grid swiper-wrapper">
+                    <% similarProducts.forEach(product => { %>
+                        <div class="products-container swiper-slide">
+                            <a href="/product-details?id=<%= product.id %>" style="text-decoration: none; color: inherit;">
+                                <div class="product">
+                                    <div class="wishlist-icon" data-id="<%= product.id %>" data-is-in-wishlist="<%= product.isInWishlist %>">
+                                        <i class="<%= product.isInWishlist ? 'fas red-heart' : 'far grey-heart' %> fa-heart"></i>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star" style="color: goldenrod;"></i>
+                                        <span class="rating-value">
+                                            <%= typeof product.rating === 'number' && !isNaN(product.rating) ? product.rating.toFixed(1) : '4.0' %>
+                                        </span>
+                                    </div>
+                                    <a href="/product-details?id=<%= product.id %>">
+                                        <img src="<%= product.product_img %>" alt="<%= product.p_category %>">
+                                    </a>
+                                    <p class="product-brand"><%= product.brand %></p>
+                                    <p class="product-features" style="color: rgb(27, 27, 27); width: 90%; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; line-height: 1.2; max-height: calc(1.5em * 2);"><%= product.p_features %></p>
+                                    <p class="product-category"><%= product.p_category %></p>
+                                    <p class="product-price"><%= currencySymbol %><%= product.convertedPrice %></p>
+                                </div>
+                            </a>
+                        </div>
+                    <% }) %>
+                </div>
+                <div class="similar-products-button">
+                    <button class="swiper1-prev swiper-button-prev s-prev-btn"></button>
+                    <button class="swiper1-next swiper-button-next s-next-btn"></button>
+                </div>
+            </div>
+        </div>      
+        <div id="recently-viewed-products">
+            <h2>Recently Viewed Products</h2>
+            <div class="r-v-container swiper-container">
+                <div class="r-v-product-grid swiper-wrapper">
+                    <% recentlyViewedProducts.forEach(product => { %>
+                        <div class="r-v-product swiper-slide">
+                            <div class="product">
+                                <div class="wishlist-icon" data-id="<%= product.id %>" data-is-in-wishlist="<%= product.isInWishlist %>">
+                                    <i class="<%= product.isInWishlist ? 'fas red-heart' : 'far grey-heart' %> fa-heart"></i>
+                                </div>
+                                <div class="rating">
+                                    <i class="fas fa-star" style="color: goldenrod;"></i>
+                                    <span class="rating-value"><%= typeof product.rating === 'number' && !isNaN(product.rating) ? product.rating.toFixed(1) : '4.0' %></span>
+                                </div>
+                                <a href="/product-details?id=<%= product.id %>"><img src="<%= product.product_img %>" alt="<%= product.p_category %>"></a>
+                                <p class="product-brand"><%= product.brand %></p>
+                                <p class="product-features" style="color: rgb(27, 27, 27); width: 90%; display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; -webkit-line-clamp: 2; line-height: 1.2; max-height: calc(1.5em * 2);"><%= product.p_features %></p>
+                                <p class="product-category"><%= product.p_category %></p>
+                                <p class="product-price"><%= currencySymbol %><%= product.convertedPrice %></p>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+                <button class="swiper2-prev swiper-button-prev r-prev-btn"></button>
+                <button class="swiper2-next swiper-button-next r-next-btn"></button>
+            </div>
+        </div>  
+    </section>
+    <section id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <div class="m_product-image-container">
+                <img class="m_p_img" src="<%= product.product_img %>">
+            </div>
+            <div class="m_p_d_indicator">
+                <div class="m_indicator" attr="0">
+                    <img src="<%= product.product_img %>" >
+                </div>
+                <div class="m_indicator" attr="1">
+                    <img img src="<%= product.product_img_s1 %>">
+                </div>
+                <div class="m_indicator" attr="2">
+                    <img src="<%= product.product_img_s2 %>">
+                </div>
+                <div class="m_indicator" attr="3">
+                    <img src="<%= product.product_img_s3 %>">
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="collections">
+            <div class="collections-heading">
+                <h3>COLLECTIONS</h3>
+                <button onclick="c_h_button()" class="c_h_button"><svg id="arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg></button>
+            </div>
+            <div id="collections-dropdown" class="collections-dropdown-content">
+                <a href="/products?type=Automatics"><p>Goldec Automatics</p></a>
+                <a href="/products?brand=AURA"><p>Aura Power Pearls</p></a>
+                <a href="/products?brand=ECLIPSE"><p>Eclipse</p></a>
+                <a href="/products?material=Pearl&Stainless Steel"><p>Goldec Jewels</p></a>
+                <a href="/products?category=Wall Clock"><p>Premium Clocks</p></a>
+                <a href="/products?category=Alarm Clock"><p>Alarm Clocks</p></a>
+                <a href="/products?category=Smart Watch"><p>Smart Watches</p></a>
+            </div>
+        </div>
+        <div class="customer-service">
+            <div class="c-s-heading">
+                <h3>CUSTOMER SERVICE</h3>
+                <button onclick="c_s_h_button()" class="c_s_h_button"><svg id="c-arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="40px" fill="#999999"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg></button>
+            </div>
+            <div id="c-s-dropdown"  class="c-s-dropdown-content">
+                <p>Payment Options</p>
+                <p>Track Order</p>
+                <p>Help & Contact</p>
+                <p>FAQs</p>
+            </div>
+
+        </div>
+        <div class="f-about"> 
+            <div class="f-about-heading">
+                <h3>BRAND PROTECTION</h3>
+                <button onclick="f_about_button()" class="f_about_button">
+                    <svg id="b-arrow-icon" xmlns="http://www.w3.org/2000/svg" height="40px" viewBox="0 -960 960 960" width="4p0x" fill="#999999"><path d="M327.69-420 480-572.31 632.31-420H327.69Z"/></svg>
+                </button>
+            </div>
+            <div id="f-about-dropdown" class="f-about-dropdown-content">
+                <p>Corporate</p>
+                <p>Careers</p>
+                <p>Blog</p>
+            </div>
+        </div>
+        
+        <div class="f-links">
+            <p>Download Goldec Store App</p>
+            <div class="download">
+                <img src="/img/app_store.png">
+                <img src="/img/play_store.png">
+            </div>
+            <p>Follow Us On</p>
+            <div class="follow-us-on">
+                <img src="/img/facebook-1.png">
+                <img src="/img/insta-1.png">
+                <img src="/img/tweet-1.png">
+                <img src="/img/tube-1.png">
+            </div>
+            <p>Want Help? <a href="" style="color: rgb(194, 193, 193);">Click Here</a> To Chat With Us On</p>
+            <p>Operating Hours: 10:00AM To 10:00PM Monday To Sunday</p>
+        </div>
+        <div class="f-payment">
+            <img src="/img/visa.png">
+            <img src="/img/master_card.png">
+            <img src="/img/rupay.png">
+            <img src="/img/american_express.png">
+            <img src="/img/diners_club.png">
+            <img src="/img/icici.png">
+            <img src="/img/axis.png">
+        </div>
+    </footer>
+    <script>
+        //------------------- similar products ------------------//
+        
+        const swiper1 = new Swiper('.similar-product-container', {
+            spaceBetween: 15,
+            
+            navigation: {
+                nextEl: '.swiper1-next',
+                prevEl: '.swiper1-prev',
+            },
+            breakpoints: {
+                344: {
+                    spaceBetween: 0,
+                    slidesPerView: 2.1
+                },
+                360: {
+                    spaceBetween: 0,
+                    slidesPerView: 2.2
+                },
+                375: {
+                    slidesPerView: 2.4,
+                },
+                412: {
+                    slidesPerView: 2.6,
+                },
+                430:{
+                    slidesPerView: 2.7,
+                },
+                540: {
+                    slidesPerView: 3.2,
+                },
+                600: {
+                    slidesPerView: 2.5,
+                },
+                768: {
+                    spaceBetween: 2,
+                    slidesPerView: 3.1,
+                },
+                820: {
+                    slidesPerView: 3.2,
+                },
+                853: {
+                    slidesPerView: 3.3,
+                },
+                912: {
+                    slidesPerView: 3.5,
+                },
+                1024: {
+                    slidesPerView: 4,
+                },
+                1366: {
+                    slidesPerView: 5.5,
+                }
+            }
+        });
+
+        // -------------- Recently viewed ------------------//
+
+        const swiper2 = new Swiper('.r-v-container', {
+            spaceBetween: 15, // Space between slides
+
+            navigation: {
+                nextEl: '.swiper2-next',
+                prevEl: '.swiper2-prev',
+            },
+            breakpoints: {
+                344: {
+                    spaceBetween: 0,
+                    slidesPerView: 2.1
+                },
+                360: {
+                    spaceBetween: 0,
+                    slidesPerView: 2.2
+                },
+                375: {
+                    slidesPerView: 2.4,
+                },
+                412: {
+                    slidesPerView: 2.6,
+                },
+                430:{
+                    slidesPerView: 2.7,
+                },
+                540: {
+                    slidesPerView: 3.2,
+                },
+                600: {
+                    slidesPerView: 2.5,
+                },
+                768: {
+                    spaceBetween: 2,
+                    slidesPerView: 3.1,
+                },
+                820: {
+                    slidesPerView: 3.2,
+                },
+                853: {
+                    slidesPerView: 3.3,
+                },
+                912: {
+                    slidesPerView: 3.5,
+                },
+                1024: {
+                    slidesPerView: 4,
+                },
+                1366: {
+                    slidesPerView: 5.5,
+                }
+            }
+        });
+        
+
+        //------------------- cart ------------------//
+        
+        document.getElementById("addToCartBtn").addEventListener("click", () => {
+            const productDetails = {
+                productId: "<%= product.id %>",
+                productName: "<%= product.brand %> - <%= product.p_category %>",
+                productPrice: "<%= product.p_price %>",
+                productImage: "<%= product.product_img %>"
+            };
+
+            // Send product details to the server
+            fetch('/cart/add', { // Correct endpoint
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(productDetails)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message); // Feedback to the user
+                }
+                console.log(data.cart); // Debugging info in the console
+            })
+            .catch(err => console.error("Error adding to cart:", err));
+        });
+
+        //---------------image slide---------------//
+    
+        const slideImages = document.querySelectorAll('.p_img');
+        const thumbnails = document.querySelectorAll('.p_d_indicator .indicator img');
+        const thumbnailContainers = document.querySelectorAll('.p_d_indicator .indicator');
+        const mainImage = document.querySelector('.product-image-container img');
+        let counter = 0;
+        thumbnails.forEach((img, index) => {
+            img.onerror = () => {
+                thumbnailContainers[index].remove();
+            };
+        });
+        function updateIndicators() {
+            thumbnailContainers.forEach((container, index) => {
+                container.classList.toggle('active', index === counter);
+            });
+        }
+        function switchImage(event) {
+            const imageId = parseInt(event.target.closest('.indicator').getAttribute('attr'));
+            if (imageId === counter) return;
+
+            counter = imageId;
+            mainImage.src = thumbnails[counter].src;
+            updateIndicators();
+        }
+        thumbnailContainers.forEach((thumbnail) => {
+            thumbnail.addEventListener('click', switchImage);
+        });
+        updateIndicators();
+
+        //---------------------- Image Zoom ---------------------//
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('zoomedImage');
+        const closeModal = document.querySelector('.close');
+        const productImages = document.querySelectorAll('.product-image-container img');
+        productImages.forEach((img) => {
+            img.addEventListener('click', () => {
+                modal.style.display = 'block';
+                modalImage.src = img.src;
+            });
+        });
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        //------------------ Modal Image Slide -----------------//
+        const modalImg = document.querySelectorAll('.m_p_img');
+        const modalInd = document.querySelectorAll('.m_p_d_indicator .m_indicator img');
+        const modalIndContainer = document.querySelectorAll('.m_p_d_indicator .m_indicator');
+        const mainImg = document.querySelector('.m_product-image-container img');
+        modalInd.forEach((img, index) => {
+            img.onerror = () => {
+                modalIndContainer[index].remove();
+            };
+        });
+        function updateInd() {
+            modalIndContainer.forEach((container, index) => {
+                container.classList.toggle('active', index === counter);
+            });
+        }
+        function switchImg(event) {
+            const imageId = parseInt(event.target.closest('.m_indicator').getAttribute('attr'));
+            if (imageId === counter) return;
+
+            counter = imageId;
+            mainImg.src = modalInd[counter].src;
+            updateInd();
+        }
+        modalIndContainer.forEach((thumbnail) => {
+            thumbnail.addEventListener('click', switchImg);
+        });
+        updateInd();
+        
+
+    </script>
+
+</body>
+</html>
+
