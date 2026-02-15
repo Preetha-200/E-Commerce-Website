@@ -10,12 +10,13 @@ require('dotenv').config();
 const pgSession = require('connect-pg-simple')(session);
 
 // ---------------- Database Configuration ---------------- //
+
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'Goldec',
-    password: 'D11P^2004-april',
-    port: 5432,
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_NAME,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
 });
 
 // ---------------- Middleware ---------------- //
