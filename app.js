@@ -21,12 +21,14 @@ module.exports = pool;
 
 
 // ---------------- Middleware ---------------- //
+
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.set('trust proxy', 1);
 app.use(session({
     store: new pgSession({
         pool: pool,
@@ -35,7 +37,7 @@ app.use(session({
     }),
     secret: 'D11P^2004-april',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     cookie: {
         secure: process.env.NODE_ENV === 'production',
         maxAge: 24 * 60 * 60 * 1000
@@ -297,12 +299,19 @@ app.post('/signup', async (req, res) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
+        const existingUser = await pool.query(
+            'SELECT * FROM users WHERE email = $1',
+            [email]
+        );
+
+        if (existingUser.rows.length > 0) {
+            return res.send("User already exists. Please sign in.");
+        }
 
         // Insert user data into the database
         await pool.query(
             `INSERT INTO users (username, email, password, region) 
-             VALUES ($1, $2, $3, $4) 
-             ON CONFLICT (email) DO NOTHING`,
+             VALUES ($1, $2, $3, $4)`,
             [username, email, hashedPassword, region]
         );
 
