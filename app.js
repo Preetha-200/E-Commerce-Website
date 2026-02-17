@@ -627,13 +627,10 @@ app.post('/get-filtered-count', async (req, res) => {
 // ---------------- Product Details ---------------- //
 
 app.get('/product-details', async (req, res) => {
-    const productId = parseInt(req.query.id, 10); // Ensure productId is an integer
-
-    // Validate product ID
-    if (!productId || isNaN(productId)) {
+    const productId = parseInt(req.query.id, 10);
+    if (!Number.isInteger(productId) || productId <= 0) {
         return res.status(400).send('Invalid Product ID');
     }
-
     if (!req.session.user) {
         req.session.redirectTo = req.originalUrl;
         return res.redirect('/signin');
