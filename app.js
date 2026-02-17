@@ -249,19 +249,20 @@ app.post('/signin', async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        // Query to find the user by email
         const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
         if (result.rows.length === 0) {        
             return res.redirect('/signup');
         }
+        const user = await User.findOne({ where: { email } });
 
-        const user = result.rows[0];
-       
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) {
-            return res.send('Invalid password.');
+        if (!user) {
+            return res.render("signin", { error: "User not found" });
         }
-        
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+            return res.render("signin", { error: "Invalid password" });
+        }
         req.session.user = {
             username: user.username,
             userpassword: user.password,
@@ -298,7 +299,13 @@ app.post('/signup', async (req, res) => {
         if (!strongPasswordRegex.test(password)) {
             return res.send("Password must contain at least 8 characters, one uppercase, one lowercase, one number, and one special character.");
         }
+        const bcrypt = require("bcrypt");
         const hashedPassword = await bcrypt.hash(password, 10);
+        await User.create({
+            email,
+            password: hashedPassword
+        });
+
         const existingUser = await pool.query(
             'SELECT * FROM users WHERE email = $1',
             [email]
