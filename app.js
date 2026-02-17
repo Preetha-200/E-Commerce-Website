@@ -267,6 +267,15 @@ app.post('/signin', async (req, res) => {
 
         const redirectTo = req.session.redirectTo || '/account';
         req.session.redirectTo = null; 
+        if (redirectTo.startsWith('/product-details')) {
+            const urlParams = new URLSearchParams(redirectTo.split('?')[1]);
+            const productId = parseInt(urlParams.get('id'), 10);
+
+            const productCheck = await pool.query('SELECT id FROM products WHERE id = $1', [productId]);
+            if (productCheck.rows.length === 0) {
+                return res.redirect('/'); // fallback if product doesn't exist
+            }
+        }
         res.redirect(redirectTo); 
     } catch (err) {
         console.error('Error during sign-in:', err);
@@ -365,12 +374,12 @@ app.get('/', async (req, res) => {
         let recommendedProducts = [];
         if (req.session.user && req.session.user.recentViews && req.session.user.recentViews.length > 0) {
             const recentProductId = req.session.user.recentViews[req.session.user.recentViews.length - 1];
-            const categoryResult = await pool.query('SELECT p_category FROM products WHERE p_id = $1', [recentProductId]);
+            const categoryResult = await pool.query('SELECT p_category FROM products WHERE id = $1', [recentProductId]);
             
             if (categoryResult.rows.length > 0) {
                 const category = categoryResult.rows[0].p_category;
                 const recommendedResult = await pool.query(
-                    'SELECT * FROM products WHERE p_category = $1 AND p_id != $2 ORDER BY RANDOM() LIMIT 10', 
+                    'SELECT * FROM products WHERE p_category = $1 AND id != $2 ORDER BY RANDOM() LIMIT 10', 
                     [category, recentProductId]
                 );
 
