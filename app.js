@@ -251,21 +251,17 @@ app.post('/signin', async (req, res) => {
     try {
         // Query to find the user by email
         const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-
-        if (result.rows.length === 0) {
-            // If no user is found, redirect to the sign-up page
+        if (result.rows.length === 0) {        
             return res.redirect('/signup');
         }
 
         const user = result.rows[0];
-
-        // Compare the provided password with the hashed password in the database
+       
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
             return res.send('Invalid password.');
         }
-
-        // Set session data after successful login
+        
         req.session.user = {
             username: user.username,
             userpassword: user.password,
@@ -273,8 +269,9 @@ app.post('/signin', async (req, res) => {
             region: user.region
         };
 
-        console.log("Session user data:", req.session.user);
-        res.redirect('/account'); // Redirect to the account page
+        const redirectTo = req.session.redirectTo || '/account';
+        req.session.redirectTo = null; 
+        res.redirect(redirectTo); 
     } catch (err) {
         console.error('Error during sign-in:', err);
         res.status(500).send('Server Error');
@@ -297,7 +294,10 @@ app.post('/signup', async (req, res) => {
         if (password !== confirm_password) {
             return res.send('Passwords do not match. Please try again.');
         }
-
+        const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+        if (!strongPasswordRegex.test(password)) {
+            return res.send("Password must contain at least 8 characters, one uppercase, one lowercase, one number, and one special character.");
+        }
         const hashedPassword = await bcrypt.hash(password, 10);
         const existingUser = await pool.query(
             'SELECT * FROM users WHERE email = $1',
@@ -308,15 +308,16 @@ app.post('/signup', async (req, res) => {
             return res.send("User already exists. Please sign in.");
         }
 
-        // Insert user data into the database
         await pool.query(
             `INSERT INTO users (username, email, password, region) 
              VALUES ($1, $2, $3, $4)`,
             [username, email, hashedPassword, region]
         );
 
-        req.session.user = { username, email, region }; // Store user details in session
-        res.redirect('/account'); // Redirect to account page
+        req.session.user = { username, email, region };
+        const redirectTo = req.session.redirectTo || '/account';
+        req.session.redirectTo = null;
+        res.redirect(redirectTo);
     } catch (err) {
         console.error('Error during sign-up:', err);
         res.status(500).send('Server Error');
@@ -327,7 +328,7 @@ app.post('/signup', async (req, res) => {
 
 app.get('/account', (req, res) => {
     if (!req.session.user) {
-        return res.redirect('/signin'); // Redirect to sign-in if the user is not logged in
+        return res.redirect('/signin');
     }
     res.render('account', { user: req.session.user });
 });
@@ -336,7 +337,7 @@ app.get('/account', (req, res) => {
 
 app.get('/', async (req, res) => { 
     const region = req.session.user ? req.session.user.region : 'United States';
-    const currency = getCurrencyFromRegion(region); // Get currency based on the region
+    const currency = getCurrencyFromRegion(region);
 
     let currencySymbol = '$';
     switch (currency) {
