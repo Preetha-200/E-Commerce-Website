@@ -239,8 +239,9 @@ const ensureLoggedIn = (req, res, next) => {
 // ---------------- Sign-In Page ---------------- //
 
 app.get('/signin', (req, res) => {
-    if (req.session.user) {
-        return res.redirect('/account'); // Redirect to account if the user is already logged in
+    if (!req.session.user) {
+        req.session.redirectTo = req.originalUrl;
+        return res.redirect('/signin');
     }
     res.render('signin');
 });
@@ -282,8 +283,9 @@ app.post('/signin', async (req, res) => {
 // ---------------- Sign-Up Page ---------------- //
 
 app.get('/signup', (req, res) => {
-    if (req.session.user) {
-        return res.redirect('/account');
+    if (!req.session.user) {
+        req.session.redirectTo = req.originalUrl;
+        return res.redirect('/signin');
     }
     res.render('signup');
 });
@@ -412,7 +414,10 @@ app.get('/about',(req, res) => {
 // ------------------------ order -------------------------//
 
 app.get('/my-order',(req, res) => {
-    res.render('my-order');
+    if (!req.session.user) {
+        req.session.redirectTo = req.originalUrl;
+        return res.redirect('/signin');
+    }
 });
 
 //------------------------ Products -------------------------//
@@ -634,6 +639,7 @@ app.get('/product-details', async (req, res) => {
     }
 
     if (!req.session.user) {
+        req.session.redirectTo = req.originalUrl;
         return res.redirect('/signin');
     }
 
@@ -878,10 +884,10 @@ app.get('/cart', async (req, res) => {
         });
     }
 
-    console.log('Similar or Random Products:', similarProducts); // Log final similar or random products
+    console.log('Similar or Random Products:', similarProducts);
 
     const message = req.session.message || null;
-    req.session.message = null; // Clear the message after displaying
+    req.session.message = null; 
 
     res.render('cart', { cart: convertedCart, currencySymbol, message, similarProducts });
 });
@@ -891,7 +897,7 @@ app.post('/cart/remove', (req, res) => {
     const { productId } = req.body;
 
     if (req.session.cart) {
-        req.session.cart = req.session.cart.filter(product => product.productId != productId); // Match the exact property name
+        req.session.cart = req.session.cart.filter(product => product.productId != productId); 
     }
 
     res.redirect('/cart');
@@ -901,9 +907,10 @@ app.post('/cart/remove', (req, res) => {
 
 app.get('/wishlist', async (req, res) => {
     if (!req.session.user) {
-        return res.redirect('/signin'); // Redirect to sign-in if not logged in
+        req.session.redirectTo = req.originalUrl;
+        return res.redirect('/signin');
     }
-    const userEmail = req.session.user.email; // Get the user's email from session
+    const userEmail = req.session.user.email; 
     const region = req.session.user.region || 'United States';
     const currency = getCurrencyFromRegion(region);
     let currencySymbol = '$';
@@ -973,6 +980,7 @@ function getCurrencySymbol(currency) {
 
 app.post('/order-confirmation', async (req, res) => {
     if (!req.session.user) {
+        req.session.redirectTo = req.originalUrl;
         return res.redirect('/signin');
     }
 
@@ -1003,6 +1011,7 @@ app.post('/order-confirmation', async (req, res) => {
 
 app.post('/payment', (req, res) => {
     if (!req.session.user) {
+        req.session.redirectTo = req.originalUrl;
         return res.redirect('/signin');
     }
 
