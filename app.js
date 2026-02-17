@@ -239,11 +239,10 @@ const ensureLoggedIn = (req, res, next) => {
 // ---------------- Sign-In Page ---------------- //
 
 app.get('/signin', (req, res) => {
-    if (!req.session.user) {
-        req.session.redirectTo = req.originalUrl;
-        return res.redirect('/signin');
+    if (req.session.user) {
+        return res.redirect('/account');
     }
-    res.render('signin');
+    res.render('signin', { error: null });
 });
 
 app.post('/signin', async (req, res) => {
@@ -252,13 +251,9 @@ app.post('/signin', async (req, res) => {
     try {
         const result = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
         if (result.rows.length === 0) {        
-            return res.redirect('/signup');
+           return res.render("signin", { error: "User not found" });
         }
-        const user = await User.findOne({ where: { email } });
-
-        if (!user) {
-            return res.render("signin", { error: "User not found" });
-        }
+        const user = result.rows[0];
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
@@ -266,7 +261,6 @@ app.post('/signin', async (req, res) => {
         }
         req.session.user = {
             username: user.username,
-            userpassword: user.password,
             email: user.email,
             region: user.region
         };
@@ -283,12 +277,12 @@ app.post('/signin', async (req, res) => {
 // ---------------- Sign-Up Page ---------------- //
 
 app.get('/signup', (req, res) => {
-    if (!req.session.user) {
-        req.session.redirectTo = req.originalUrl;
-        return res.redirect('/signin');
+    if (req.session.user) {
+        return res.redirect('/account');
     }
     res.render('signup');
 });
+
 
 app.post('/signup', async (req, res) => {
     const { username, email, password, confirm_password, region } = req.body;
@@ -303,10 +297,12 @@ app.post('/signup', async (req, res) => {
         }
         const bcrypt = require("bcrypt");
         const hashedPassword = await bcrypt.hash(password, 10);
-        await User.create({
-            email,
-            password: hashedPassword
-        });
+        await pool.query(
+            `INSERT INTO users (username, email, password, region) 
+            VALUES ($1, $2, $3, $4)`,
+            [username, email, hashedPassword, region]
+        );
+
 
         const existingUser = await pool.query(
             'SELECT * FROM users WHERE email = $1',
