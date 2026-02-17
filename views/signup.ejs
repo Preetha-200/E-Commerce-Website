@@ -208,20 +208,19 @@
                     <input type="text" id="username" name="username" placeholder="Enter your username" required />
                 </div>
                 <div class="form-group">
-                    <input type="text" 
-                        class="form-control" id="email" name="email" placeholder="Enter your email-id" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email-id" required>
                 </div>
                 <div class="p_create">
-                  <input type="password" id="password" name="password" placeholder="Enter your Password" required>
-                  <button type="button" id="togglePassword1">
-                    <i class="fas fa-eye" id="icon1"></i>
-                  </button>
+                    <input type="password" id="password" name="password" placeholder="Enter your Password" required minlength="8" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$">
+                    <button type="button" id="togglePassword1">
+                        <i class="fas fa-eye" id="icon1"></i>
+                    </button>
                 </div>
                 <div class="p_confirm">
-                  <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
-                  <button type="button" id="togglePassword2">
-                    <i class="fas fa-eye" id="icon2"></i>
-                  </button>
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                    <button type="button" id="togglePassword2">
+                        <i class="fas fa-eye" id="icon2"></i>
+                    </button>
                 </div>
                 <div class="u-region">
                     <label for="region">Region:</label>
@@ -307,7 +306,7 @@
     </footer>
     <script>
         // Regular expression for strong password validation
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&+=!]).{8,}$/;
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*?!]).{8,}$/;
         const togglePassword1 = document.querySelector('#togglePassword1');
         const passwordField1 = document.querySelector('#password');
         const icon1 = document.querySelector('#icon1');
