@@ -298,7 +298,7 @@ button.next:hover, button.prev:hover{
 }
 .trends-img{
     margin: 8px;
-    width: 400px;
+    width: 50%;
 }
 .trends-container{
     display: flex;
@@ -952,6 +952,16 @@ footer p{
 }
 
 /*-------------- media query  ---------------*/
+@media (max-width: 1500px){
+    #trends{
+        height: 30%;
+        margin: 40px 10px;
+    }
+    .trends-img{
+        margin: auto;
+        width: 60%;
+    }
+}
 
 @media (max-width: 1024px){
     #header img{
