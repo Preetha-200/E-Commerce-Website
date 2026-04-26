@@ -1994,3 +1994,20 @@ footer p{
         margin: 8% 2%;
     } 
 }
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: clip;
+}
