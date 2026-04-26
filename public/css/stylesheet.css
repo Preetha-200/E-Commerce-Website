@@ -832,7 +832,7 @@ footer p{
     font-family: 'Work Sans';
     width: 30%;
     height: 55%;
-    margin: 5% 30% ;
+    margin: 5% 30%;
     margin-bottom: 20px;
 }
 .order-amount-calculation p{margin-left: 10px;}
@@ -1143,6 +1143,7 @@ footer p{
 }
 
 @media (max-width: 768px){
+    
     #header{grid-template-columns: 15% 70% 15%;}
     #header img{ 
         width: 55px;
