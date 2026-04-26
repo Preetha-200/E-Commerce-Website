@@ -302,6 +302,7 @@ button.next:hover, button.prev:hover{
 }
 .trends-container{
     display: flex;
+    width: 95%;
 }
 .trends-button{display: none;}
 .swiper-pagination {
