@@ -151,16 +151,34 @@ body a{
 }
 
 /*-------------- categories ---------------*/
-#categories nav{
+#categories ul {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 35px;
+    list-style: none;
+    padding: 18px 25px;
+    margin: 0;
 }
-#categories ul{
-    font-family: 'Work Sans';
-    font-size: 14px;
-    margin: 20px 3px;
+
+#categories ul li {
+    margin: 0;
+    padding: 0;
 }
-#categories a{ color: #343434;}
-#categories nav ul:hover{ color: #767676;}
+
+#categories ul li a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+#categories ul li a:hover {
+    color: #8B5E3C;
+}
 
 /*------------ location ---------------*/
 #location{
@@ -1193,7 +1211,14 @@ footer p{
     .h-cart .svg{ padding-left: 0;}
     .h-cart ul{ padding-left: 9%;}
     .visible{ display: block;}
-    #categories ul{ font-size: 12px;}
+    #categories ul {
+        gap: 20px;
+        padding: 15px 10px;
+    }
+
+    #categories ul li a {
+        font-size: 0.9rem;
+    }
     #location{ display: none;}
     footer{
        display: flex;
