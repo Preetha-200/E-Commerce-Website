@@ -298,7 +298,7 @@ button.next:hover, button.prev:hover{
 }
 .trends-img{
     margin: 8px;
-    width: 50%;
+    width: 100%;
 }
 .trends-container{
     display: flex;
@@ -959,7 +959,8 @@ footer p{
     }
     .trends-img{
         margin: auto;
-        width: 60%;
+        width: 100%;
+        height: auto;
     }
 }
 
