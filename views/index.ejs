@@ -579,20 +579,31 @@
 
         //-------------- Badges ----------------//
         const swiper1 = new Swiper('.badge-container', {
-            spaceBetween: 5,
             direction: 'horizontal',
-            // Navigation arrows
             navigation: {
                 nextEl: '.swiper1-next',
                 prevEl: '.swiper1-prev',
             },
     
             breakpoints: {
-                312: { slidesPerView: 5},
-                600: { slidesPerView: 6},
-                820: { slidesPerView: 6},
-                1024: { slidesPerView: 6},
-                1366: { slidesPerView: 8}
+                312: { 
+                    slidesPerView: 5,
+                    spaceBetween: 5
+                },
+                600: { 
+                    slidesPerView: 6
+
+                },
+                820: { 
+                    slidesPerView: 6
+
+                },
+                1024: { 
+                    slidesPerView: 6
+                },
+                1366: { 
+                    slidesPerView: 8
+                }
             }
         });
         //-------------- Pins ----------------//
@@ -644,9 +655,18 @@
                     slidesPerView: 1.1,
                     spaceBetween: 14
                 },
-                768: { slidesPerView: 2},
-                1024: { slidesPerView: 2.5},
-                1366 :{ slidesPerView: 3}
+                768: { 
+                    slidesPerView: 2,
+                    spaceBetween: 5
+                },
+                1024: { 
+                    slidesPerView: 2.5,
+                    spaceBetween: 5
+                },
+                1366 :{ 
+                    slidesPerView: 3,
+                    spaceBetween: 5
+                }
             }
         });
         //---------------- new products ------------------//

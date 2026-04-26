@@ -153,6 +153,7 @@ body a{
 /*-------------- categories ---------------*/
 #categories nav{
     display: flex;
+    justify-content: center;
 }
 #categories ul{
     font-family: 'Work Sans';
