@@ -575,6 +575,43 @@
             }
             indicators();
         }
+
+        //-------------- Category ----------------//
+        const categorySwiper = new Swiper('.categorySwiper', {
+            loop: false,
+            speed: 700,
+            grabCursor: true,
+            watchOverflow: true,
+
+            navigation: {
+                nextEl: '.category-next',
+                prevEl: '.category-prev'
+            },
+
+            breakpoints: {
+                0: {
+                    slidesPerView: 2.2,
+                    spaceBetween: 12
+                },
+                576: {
+                    slidesPerView: 3.2,
+                    spaceBetween: 16
+                },
+                768: {
+                    slidesPerView: 4.2,
+                    spaceBetween: 20
+                },
+                992: {
+                    slidesPerView: 5,
+                    spaceBetween: 24
+                },
+                1200: {
+                    slidesPerView: 6,
+                    spaceBetween: 28
+                }
+            }
+        });
+
         //-------------- Badges ----------------//
         const swiper1 = new Swiper('.badge-container', {
             spaceBetween: 5,
