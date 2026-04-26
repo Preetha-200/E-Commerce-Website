@@ -230,17 +230,17 @@
             </div>
         </nav>
     </section>
-    <section id="categories" class="categoriesSwiper">
+    <section id="categories">
         <nav>
-            <a href="/products?category=Men’s Watch"><ul class="swiper-slide">MEN</ul></a>
-            <a href="/products?category=Women’s Watch"><ul class="swiper-slide">WOMEN</ul></a>
-            <a href="/products?category=Smart Watch"><ul class="swiper-slide">SMART WATCHES</ul></a>
-            <a href="/products?category=Alarm Clock"><ul class="swiper-slide">PREMIUM ALARMS</ul></a>
-            <a href="/products?category=Men’s Watch,Women’s Watch"><ul class="swiper-slide">PREMIUM COLLECTIONS</ul></a>
-            <a href="/products?category=Kids Watch"><ul class="swiper-slide">KIDS COLLECTIONS</ul></a>
-            <a href="/products?category=Couple Watch"><ul class="swiper-slide">COUPLES COLLECTIONS</ul></a>
-            <a href="/products?category=Wall Clock"><ul class="swiper-slide">CLOCKS</ul></a>
-            <a href="/products?category=Couples Watch"><ul class="swiper-slide">GIFTS</ul></a>
+            <a href="/products?category=Men’s Watch"><ul>MEN</ul></a>
+            <a href="/products?category=Women’s Watch"><ul>WOMEN</ul></a>
+            <a href="/products?category=Smart Watch"><ul>SMART WATCHES</ul></a>
+            <a href="/products?category=Alarm Clock"><ul>PREMIUM ALARMS</ul></a>
+            <a href="/products?category=Men’s Watch,Women’s Watch"><ul>PREMIUM COLLECTIONS</ul></a>
+            <a href="/products?category=Kids Watch"><ul>KIDS COLLECTIONS</ul></a>
+            <a href="/products?category=Couple Watch"><ul>COUPLES COLLECTIONS</ul></a>
+            <a href="/products?category=Wall Clock"><ul>CLOCKS</ul></a>
+            <a href="/products?category=Couples Watch"><ul>GIFTS</ul></a>
         </nav>
     </section>
     <section id="location">
@@ -576,41 +576,6 @@
             indicators();
         }
 
-        //-------------- Category ----------------//
-        const categorySwiper = new Swiper('.categoriesSwiper', {
-            loop: false,
-            speed: 700,
-            grabCursor: true,
-            watchOverflow: true,
-
-            navigation: {
-                nextEl: '.category-next',
-                prevEl: '.category-prev'
-            },
-
-            breakpoints: {
-                0: {
-                    slidesPerView: 2.2,
-                    spaceBetween: 12
-                },
-                576: {
-                    slidesPerView: 3.2,
-                    spaceBetween: 16
-                },
-                768: {
-                    slidesPerView: 4.2,
-                    spaceBetween: 20
-                },
-                992: {
-                    slidesPerView: 5,
-                    spaceBetween: 24
-                },
-                1200: {
-                    slidesPerView: 6,
-                    spaceBetween: 28
-                }
-            }
-        });
 
         //-------------- Badges ----------------//
         const swiper1 = new Swiper('.badge-container', {
