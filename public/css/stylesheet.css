@@ -2000,14 +2000,14 @@ footer p{
 *::after {
     box-sizing: border-box;
 }
-
-img {
-    max-width: 100%;
-    height: auto;
-}
-
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: clip;
+    overflow-x: hidden;
+    width: 100%;
+}
+img {
+    display: block;
+    max-width: 100%;
+    height: auto;
 }
