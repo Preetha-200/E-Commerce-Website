@@ -231,7 +231,7 @@
         </nav>
     </section>
     <section id="categories">
-        <nav>
+        <nav class="categoriesSwiper">
             <a href="/products?category=Men’s Watch"><ul>MEN</ul></a>
             <a href="/products?category=Women’s Watch"><ul>WOMEN</ul></a>
             <a href="/products?category=Smart Watch"><ul>SMART WATCHES</ul></a>
@@ -577,7 +577,7 @@
         }
 
         //-------------- Category ----------------//
-        const categorySwiper = new Swiper('.categorySwiper', {
+        const categorySwiper = new Swiper('.categoriesSwiper', {
             loop: false,
             speed: 700,
             grabCursor: true,
