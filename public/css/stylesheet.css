@@ -325,7 +325,7 @@ button.next:hover, button.prev:hover{
 #badges{
     width: 100%;
     height: 50%;
-    margin: 5% 0;
+    margin: 20px 0;
 }
 #badges h1{
     text-align: center;
