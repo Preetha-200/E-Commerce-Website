@@ -1,3 +1,6 @@
+-- ==========================
+-- PRODUCTS TABLE
+-- ==========================
 CREATE TABLE products (
     id SERIAL PRIMARY KEY,
     product_img VARCHAR(255),
@@ -22,75 +25,86 @@ CREATE TABLE products (
     rating_count INT DEFAULT 0
 );
 
-CREATE TABLE wishlist (
-  id SERIAL PRIMARY KEY,
-  product_id INT NOT NULL,
-  user_id INT,
-  user_email VARCHAR(255),
-  FOREIGN KEY (product_id) REFERENCES products(id),
-  CONSTRAINT unique_product_user UNIQUE (product_id, user_email)
-);
-
+-- ==========================
+-- USERS TABLE
+-- ==========================
 CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  username VARCHAR(50) UNIQUE NOT NULL,
-  password VARCHAR(255) NOT NULL
+    id SERIAL PRIMARY KEY,
+    firebase_uid VARCHAR(255) UNIQUE NOT NULL,
+    username VARCHAR(50),
+    email VARCHAR(255) UNIQUE NOT NULL,
+    region VARCHAR(255),
+    currency VARCHAR(10) DEFAULT 'USD',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+-- ==========================
+-- WISHLIST TABLE
+-- ==========================
+CREATE TABLE wishlist (
+    id SERIAL PRIMARY KEY,
+    product_id INT NOT NULL,
+    user_id INT,
+    user_email VARCHAR(255),
+    CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE,
+    CONSTRAINT unique_product_user UNIQUE (product_id, user_email)
+);
+
+-- ==========================
+-- REGION-CURRENCY TABLE
+-- ==========================
 CREATE TABLE region_currency_mapping (
     region VARCHAR(255) PRIMARY KEY,
     currency VARCHAR(3) NOT NULL
 );
-INSERT INTO region_currency_mapping (region, currency) VALUES
+
+-- ==========================
+-- REGION-CURRENCY DATA
+-- ==========================
+INSERT INTO region_currency_mapping (region, currency)
+VALUES
 ('United States', 'USD'),
 ('India', 'INR'),
 ('United Kingdom', 'GBP'),
 ('Europe', 'EUR');
-SELECT column_name
-FROM information_schema.columns
-WHERE table_name = 'wishlist';
 
+-- ==========================
+-- ORDERS TABLE
+-- ==========================
 CREATE TABLE orders (
     order_id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     product_id INT REFERENCES products(id) ON DELETE CASCADE,
     order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     quantity INT DEFAULT 1,
-    status VARCHAR(50) DEFAULT 'Pending',
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (product_id) REFERENCES products(id)
+    status VARCHAR(50) DEFAULT 'Pending'
 );
 
-ALTER TABLE users
-ADD COLUMN region VARCHAR(255);
-ALTER TABLE users
-ADD COLUMN currency VARCHAR(10) DEFAULT 'USD';
-
+-- ==========================
+-- UPDATE EXISTING USERS
+-- ==========================
 UPDATE users
-SET currency = (
+SET currency =
     CASE region
         WHEN 'United States' THEN 'USD'
         WHEN 'India' THEN 'INR'
         WHEN 'United Kingdom' THEN 'GBP'
         WHEN 'Europe' THEN 'EUR'
-        ELSE 'USD' -- Default fallback
-    END
+        ELSE 'USD'
+    END;
+
+-- ==========================
+-- SESSION TABLE
+-- ==========================
+CREATE TABLE "session" (
+    "sid" VARCHAR NOT NULL,
+    "sess" JSON NOT NULL,
+    "expire" TIMESTAMP(6) NOT NULL
 );
 
-CREATE TABLE "session" (
-    "sid" varchar NOT NULL COLLATE "default",
-    "sess" json NOT NULL,
-    "expire" timestamp(6) NOT NULL
-)
-WITH (OIDS=FALSE);
-ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid");
-CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+ALTER TABLE "session"
+ADD CONSTRAINT "session_pkey"
+PRIMARY KEY ("sid");
 
-ALTER TABLE users
-ADD COLUMN email VARCHAR(255) UNIQUE NOT NULL;
-
-
-SELECT p.id, p.product_img, p.product_img_s1,  p.product_img_s2,  p.product_img_s3, p.Brand, p.Style, p.Product_Type, p.Color, p.Dial_color, p.Connectivity, p.p_shape, p.Product_Size, p.Material, p.Source, p.p_description, p.p_features ,p.p_category, p.p_price, p.rating, p.rating_count
-
-
-
+CREATE INDEX "IDX_session_expire"
+ON "session" ("expire");

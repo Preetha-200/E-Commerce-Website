@@ -363,7 +363,16 @@ app.get('/', async (req, res) => {
     }
 
     try {
-        const newArrivalsResult = await pool.query('SELECT * FROM products ORDER BY RANDOM() LIMIT 10');
+       const newArrivalsResult = await pool.query(`
+            SELECT * FROM products
+            WHERE p_category IN (
+                'Men’s Watch',
+                'Women’s Watch',
+                'Smart Watch'
+            )
+            ORDER BY RANDOM()
+            LIMIT 10
+        `);
         const newArrivals = newArrivalsResult.rows.map(product => ({
             ...product,
             convertedPrice: convertCurrency(product.p_price, 'USD', currency),
@@ -392,7 +401,18 @@ app.get('/', async (req, res) => {
             }
         } 
         if (recommendedProducts.length === 0) {
-            const randomResult = await pool.query('SELECT * FROM products ORDER BY RANDOM() LIMIT 10');
+            const randomResult = await pool.query(`
+                SELECT * FROM products
+                WHERE p_category IN (
+                    'Men’s Watch',
+                    'Women’s Watch',
+                    'Couple Watch',
+                    'Smart Watch'
+                )
+                ORDER BY RANDOM()
+                LIMIT 10
+            `);
+
             recommendedProducts = randomResult.rows.map(product => ({
                 ...product,
                 convertedPrice: convertCurrency(product.p_price, 'USD', currency),

@@ -289,37 +289,61 @@ button.next:hover, button.prev:hover{
     }
 }
 
-/*-------------- Trends  ---------------*/
+/*-------------- Trends ---------------*/
+
 #trends{
     width: 100%;
-    height: 20%;
-    margin: 40px 10px;
-}
-.trends-img{
-    margin: 8px;
-    width: 100%;
+    margin: 120px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .trends-container{
-    display: flex;
-    width: 95%;
-}
-.trends-button{display: none;}
-.swiper-pagination {
+    width: 90%;
     position: relative;
-    margin: 5% 0;
-    text-align: center;
-    width: 100%;
 }
-.swiper-pagination-bullet {
-    border: 3px solid #bbb;
+.trends{
+    display: flex;
+    align-items: center;
+}
+.trends .swiper-slide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.trends .trends-img{
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.trends .swiper-slide:hover .trends-img{
+    transform: scale(1.03);
+}
+.trends-button{
+    display: none;
+}
+.trends-pagination{
+    position: relative;
+    margin-top: 25px;
+    text-align: center;
+}
+#trends .swiper-pagination-bullet{
     width: 10px;
     height: 10px;
-    transition: opacity 0.3s ease;
+    border: 2px solid #bbb;
+    background: transparent;
+    opacity: 1;
+    transition: all 0.3s ease;
 }
-.swiper-pagination-bullet-active { background-color: #555;}
-.empty-div{
-    width: 100px;
+#trends .swiper-pagination-bullet-active{
+    background: #555;
+    border-color: #555;
 }
+
 
 /*-------------- Badges  ---------------*/
 #badges{
@@ -387,6 +411,10 @@ button.next:hover, button.prev:hover{
 
 .swiper1-prev::after, .swiper1-next::after {
     font-size: 16px;
+}
+
+.empty-div{
+    width: 100px;
 }
 
 /*-------------- Pins  ---------------*/
@@ -953,10 +981,6 @@ footer p{
 
 /*-------------- media query  ---------------*/
 @media (max-width: 1500px){
-    #trends{
-        height: 30%;
-        margin: 40px 10px;
-    }
     .trends-img{
         margin: auto;
         width: 100%;
