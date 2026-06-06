@@ -367,7 +367,7 @@ app.get('/', async (req, res) => {
             SELECT * FROM products
             WHERE p_category IN (
                 'Men’s Watch',
-                'Women’s Watch',
+                ' Women’s Watch',
                 'Smart Watch'
             )
             ORDER BY RANDOM()
@@ -405,7 +405,7 @@ app.get('/', async (req, res) => {
                 SELECT * FROM products
                 WHERE p_category IN (
                     'Men’s Watch',
-                    'Women’s Watch',
+                    ' Women’s Watch',
                     'Couple Watch',
                     'Smart Watch'
                 )
