@@ -88,7 +88,7 @@ app.get('/search', async (req, res) => {
         let detectedCategory = null;
 
         if (womenKeywords.some(k => query.includes(k))) {
-            detectedCategory = " Women’s Watch";
+            detectedCategory = "Women’s Watch";
         } else if (menKeywords.some(k => query.includes(k))) {
             detectedCategory = "Men’s Watch";
         } else if (alarmClockKeywords.some(k => query.includes(k))) {
@@ -367,7 +367,7 @@ app.get('/', async (req, res) => {
             SELECT * FROM products
             WHERE p_category IN (
                 'Men’s Watch',
-                ' Women’s Watch',
+                'Women’s Watch',
                 'Smart Watch'
             )
             ORDER BY RANDOM()
@@ -405,7 +405,7 @@ app.get('/', async (req, res) => {
                 SELECT * FROM products
                 WHERE p_category IN (
                     'Men’s Watch',
-                    ' Women’s Watch',
+                    'Women’s Watch',
                     'Couple Watch',
                     'Smart Watch'
                 )
